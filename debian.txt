@@ -1,0 +1,51 @@
+esse comando lista serviço 
+sudo systemctl list-unit-files --type service --all
+systemctl list-units --type=service
+
+esse comando disable e enable serviço
+sudo systemctl disable ou enable
+
+dar root
+sudo apt-get install lxpolkit
+
+é para tira o 5s
+/etc/default/grub
+GRUB_TIMEOUT=0
+
+para salva o grub
+sudo update-grub
+
+é para e para bio
+systemctl reboot --firmware-setup
+
+posso desligar o sistema com isso usando atalho
+sudo visudo
+akil ALL=(ALL) NOPASSWD: /sbin/poweroff
+akil ALL=(ALL) NOPASSWD: /sbin/reboot
+
+sudo vim /etc/slim.conf
+Procure pela linha auto_login no arquivo. Se ela não existir, adicione-a. Certifique-se de definir o nome de usuário desejado:
+auto_login            yes
+default_user         SEU_USUARIO
+sudo systemctl restart slim
+
+ele exibe uma lista detalhada de todos os pacotes
+dpkg --listi
+
+notificação
+sudo apt-get install libnotify-bin
+
+ativar o foco segue o mouse
+sudo apt-get install xdotool
+
+Atualizar a lista de pacotes:
+sudo apt update
+
+Atualizar pacotes instalados:
+sudo apt upgrade
+
+Atualizar para uma nova versão do Debian (opcional):
+sudo apt dist-upgrade
+
+GIT
+apt-get install git
