@@ -1,0 +1,36 @@
+otimizar
+iwr -useb https://git.io/debloat|iex
+iwr -useb https://christitus.com/win | iex
+
+quebrar a "segurança" do win
+irm https://massgrave.dev/get | iex
+
+gerenciamento de energia
+powercfg /h /type reduced
+
+atualizar
+winget upgrade --all
+
+limpar (ou "descartar") o cache do sistema
+ipconfig/flushdns
+
+verificar e corrigir problemas em discos rígidos
+chkdsk /r
+
+Verificação de Arquivos do Sistema
+sfc /scannow
+
+para reparar a imagem de instalação do sistema operacional
+dism /online /cleanup-image /restorehealth
+
+Este comando reaplica todas as configurações de política
+gpupdate /force
+
+temporizador de plataforma (platform tick)
+bcdedit /set useplatformtick yes
+
+Para desabilitar o tick dinâmico  
+bcdedit /set disabledynamictick yes 
+
+para desativar a execução de dados (NX, Non-Execute)
+bcdedit /set nx AlwaysOff
