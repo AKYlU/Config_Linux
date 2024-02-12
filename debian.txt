@@ -15,13 +15,14 @@ GRUB_TIMEOUT=0
 para salva o grub
 sudo update-grub
 
-é para e para bio
+é para ir para bio
 systemctl reboot --firmware-setup
 
 posso desligar o sistema com isso usando atalho
 sudo visudo
 akil ALL=(ALL) NOPASSWD: /sbin/poweroff
 akil ALL=(ALL) NOPASSWD: /sbin/reboot
+akil ALL=(ALL) NOPASSWD: /usr/sbin/update-initramfs -u
 
 sudo vim /etc/slim.conf
 Procure pela linha auto_login no arquivo. Se ela não existir, adicione-a. Certifique-se de definir o nome de usuário desejado:
@@ -49,3 +50,94 @@ sudo apt dist-upgrade
 
 GIT
 apt-get install git
+
+/etc/apt/sources.list
+deb http://deb.debian.org/debian buster-backports main
+sudo apt update
+sudo apt -t buster-backports install linux-image-amd64
+sudo reboot
+
+tar -xvf
+
+sudo update-initramfs -u
+
+py
+sudo apt-get install python3-pip
+
+ver kernel
+uname -a
+ls /boot
+
+Instalar las dependencias necesarias para o kernel
+sudo apt update
+sudo apt install build-essential libncurses-dev bison flex libssl-dev libelf-dev
+sudo apt-get install bc
+
+Descomprimir el archivo
+tar -xvf linux-6.7.1.tar.xz
+cd linux-6.7.1
+
+# Copiar configuración actual
+cp /boot/config-$(uname -r) .config
+
+Carregar os Módulos Atuais
+make localmodconfig
+
+# O iniciar desde cero
+make menuconfig
+
+Compilar el kernel
+make
+
+Instalar los módulos del kernel
+sudo make modules_install
+
+Instalar el kernel
+sudo make install
+
+Actualizar el cargador de arranque (GRUB)
+sudo update-grub
+
+Reiniciar
+sudo reboot
+
+Si prefieres editar el archivo .config directamente, puedes abrirlo con un editor de texto y buscar la línea que contiene CONFIG_DEBUG_INFO_BTF=y y cambiarla a CONFIG_DEBUG_INFO_BTF=n.
+make
+
+configurar os servidores DNS
+/etc/network/interfaces
+
+allow-hotplug enp3s0
+iface enp3s0 inet dhcp
+Logo abaixo dessas linhas, adicione uma linha para especificar os servidores DNS desejados. Por exemplo:
+dns-nameservers 1.1.1.1 8.8.8.8
+
+comando para remover serviço
+sudo systemctl disable
+sudo apt autoremove 
+
+serviço para se removido
+avahi-daemon.service
+console-setup.service
+lvm2-monitor.service
+plymouth   -tela gráfica durante a inicialização
+upower.service
+keyboard-setup.service
+
+Atualizar o Initramfs
+sudo update-initramfs -u
+
+listar todos os pacote do linux
+dpkg --get-selections
+listar o serviço do linux
+systemctl list-units --type=service
+
+ncdu
+
+login
+apt install xinit
+
+apagar tudo do app
+sudo apt autoremove  lightdm && sudo apt purge  lightdm && sudo rm -rf /etc/ lightdm
+
+ lightdm
