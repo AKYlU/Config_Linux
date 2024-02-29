@@ -1,10 +1,3 @@
-esse comando lista serviço 
-sudo systemctl list-unit-files --type service --all
-systemctl list-units --type=service
-
-esse comando disable e enable serviço
-sudo systemctl disable ou enable
-
 dar root
 sudo apt-get install lxpolkit
 
@@ -22,22 +15,12 @@ posso desligar o sistema com isso usando atalho
 sudo visudo
 akil ALL=(ALL) NOPASSWD: /sbin/poweroff
 akil ALL=(ALL) NOPASSWD: /sbin/reboot
-akil ALL=(ALL) NOPASSWD: /usr/sbin/update-initramfs -u
-
-sudo vim /etc/slim.conf
-Procure pela linha auto_login no arquivo. Se ela não existir, adicione-a. Certifique-se de definir o nome de usuário desejado:
-auto_login            yes
-default_user         SEU_USUARIO
-sudo systemctl restart slim
 
 ele exibe uma lista detalhada de todos os pacotes
-dpkg --listi
+dpkg --get-selections
 
 notificação
 sudo apt-get install libnotify-bin
-
-ativar o foco segue o mouse
-sudo apt-get install xdotool
 
 Atualizar a lista de pacotes:
 sudo apt update
@@ -46,23 +29,7 @@ Atualizar pacotes instalados:
 sudo apt upgrade
 
 Atualizar para uma nova versão do Debian (opcional):
-sudo apt dist-upgrade
-
-GIT
-apt-get install git
-
-/etc/apt/sources.list
-deb http://deb.debian.org/debian buster-backports main
-sudo apt update
-sudo apt -t buster-backports install linux-image-amd64
-sudo reboot
-
-tar -xvf
-
-sudo update-initramfs -u
-
-py
-sudo apt-get install python3-pip
+sudo apt dist-upgrade 
 
 ver kernel
 uname -a
@@ -107,27 +74,7 @@ sudo reboot
 Si prefieres editar el archivo .config directamente, puedes abrirlo con un editor de texto y buscar la línea que contiene CONFIG_DEBUG_INFO_BTF=y y cambiarla a CONFIG_DEBUG_INFO_BTF=n.
 make
 
-configurar os servidores DNS
-/etc/network/interfaces
-
-allow-hotplug enp3s0
-iface enp3s0 inet dhcp
-Logo abaixo dessas linhas, adicione uma linha para especificar os servidores DNS desejados. Por exemplo:
-dns-nameservers 1.1.1.1 8.8.8.8
-
-comando para remover serviço
-sudo systemctl disable
-sudo apt autoremove 
-
-serviço para se removido
-avahi-daemon.service
-console-setup.service
-lvm2-monitor.service
-plymouth   -tela gráfica durante a inicialização
-upower.service
-keyboard-setup.service
-
-Atualizar o Initramfs
+Atualizar o Initramfs ou  firmware
 sudo update-initramfs -u
 
 listar todos os pacote do linux
@@ -140,7 +87,3 @@ ncdu
 login
 apt install xinit
 
-apagar tudo do app
-sudo apt autoremove  lightdm && sudo apt purge  lightdm && sudo rm -rf /etc/ lightdm
-
- lightdm
