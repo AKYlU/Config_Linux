@@ -77,11 +77,6 @@ make
 Atualizar o Initramfs ou  firmware
 sudo update-initramfs -u
 
-listar todos os pacote do linux
-dpkg --get-selections
-listar o serviço do linux
-systemctl list-units --type=service
-
 ncdu
 
 login
