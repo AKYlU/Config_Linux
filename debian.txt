@@ -82,3 +82,4 @@ ncdu
 login
 apt install xinit
 
+lxappearance
