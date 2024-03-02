@@ -82,4 +82,15 @@ ncdu
 login
 apt install xinit
 
+ sudo apt-get install p7zip-full
+
 lxappearance
+
+rm -r /etc/default
+rm -r /etc/init.d
+
+
+export PATH=$PATH:/sbin:/usr/sbin
+
+dpkg -i
+sudo apt-get install -f
