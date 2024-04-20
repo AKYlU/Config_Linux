@@ -1,8 +1,5 @@
 sudo yast
 
-discord
-Nzk0NjYyNzQ2NTY1NjQwMjEy.GDdm6X.jq_eNO05gKLNKSToG3aV4nSmtqKdjWK9-plkCI
-
 sudo apt-get remove “nome do programa sem aspas” --auto-remove
 
 atualizar opensuse
