@@ -56,3 +56,15 @@ Tar	# tar -xvf arquivo.tar
 Tar.gz	# tar -vzxf arquivo.tar.gz
 Bz2	# bunzip arquivo.bz2    -- ou -- # bunzip2 arquivo.bz2
 Tar.bz2	# tar -jxvf arquivo.tar.bz2
+
+# kernel
+sudo zypper install gcc
+sudo zypper install flex
+sudo zypper install bison
+sudo zypper install libopenssl-devel
+sudo zypper install bc
+sudo zypper install libelf-devel
+
+
+
+
