@@ -67,6 +67,10 @@ sudo zypper install libelf-devel
 
 sudo make modules_install install
 
+sudo zypper rm --clean-deps <nome_do_pacote>
+sudo rm -r /etc/<nome_do_pacote>
+rm -r ~/.config/<nome_do_pacote>
+
 
 
 
