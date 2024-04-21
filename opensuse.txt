@@ -58,12 +58,7 @@ Bz2	# bunzip arquivo.bz2    -- ou -- # bunzip2 arquivo.bz2
 Tar.bz2	# tar -jxvf arquivo.tar.bz2
 
 # kernel
-sudo zypper install gcc
-sudo zypper install flex
-sudo zypper install bison
-sudo zypper install libopenssl-devel
-sudo zypper install bc
-sudo zypper install libelf-devel
+sudo zypper install gcc libelf-devel flex bison libopenssl-devel bc libelf-devel
 
 sudo make modules_install install
 
