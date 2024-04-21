@@ -65,6 +65,8 @@ sudo zypper install libopenssl-devel
 sudo zypper install bc
 sudo zypper install libelf-devel
 
+sudo make modules_install install
+
 
 
 
