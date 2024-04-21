@@ -58,6 +58,7 @@ make menuconfig
 
 Compilar el kernel
 make
+# make -j$(nproc)
 
 Instalar los módulos del kernel
 sudo make modules_install
