@@ -68,6 +68,9 @@ rm -r ~/.config/<nome_do_pacote>
 
  sudo grub2-mkconfig -o /boot/grub2/grub.cfg
 
+Defina o alvo padrão para gráfico
+systemctl set-default graphical
+
 
 
 
