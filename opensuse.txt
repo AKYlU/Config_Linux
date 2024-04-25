@@ -70,6 +70,7 @@ rm -r ~/.config/<nome_do_pacote>
 
 Defina o alvo padrão para gráfico
 systemctl set-default graphical
+sudo systemctl set-default graphical.target
 
 
 
