@@ -85,6 +85,8 @@ apt install xinit
 
  sudo apt-get install p7zip-full
 
+sudo apt-get install p7zip-rar
+
 lxappearance
 
 rm -r /etc/default
