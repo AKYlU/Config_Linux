@@ -72,6 +72,9 @@ Defina o alvo padrão para gráfico
 systemctl set-default graphical
 sudo systemctl set-default graphical.target
 
+# playsound
+sudo zypper in gstreamer-devel python3-gst python3-devel gcc cairo-devel gobject-introspection-devel python3-playsound alsa-firmware 
+
 
 
 
