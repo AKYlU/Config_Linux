@@ -75,6 +75,13 @@ sudo systemctl set-default graphical.target
 # playsound
 sudo zypper in gstreamer-devel python3-gst python3-devel gcc cairo-devel gobject-introspection-devel python3-playsound alsa-firmware 
 
+# remosao
+sudo zypper remove winetricks 
+sudo rm -r /usr/bin/notepad
+sudo rm -r /usr/bin/winefile
+sudo rm -r /usr/bin/winemine
+sudo zypper rm --clean-deps wofi
+
 
 
 
