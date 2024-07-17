@@ -13,8 +13,7 @@ systemctl reboot --firmware-setup
 
 posso desligar o sistema com isso usando atalho
 sudo visudo
-akil ALL=(ALL) NOPASSWD: /sbin/poweroff
-akil ALL=(ALL) NOPASSWD: /sbin/reboot
+
 akil ALL=(ALL) NOPASSWD: ALL
 
 ele exibe uma lista detalhada de todos os pacotes
