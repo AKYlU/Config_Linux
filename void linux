@@ -1,0 +1,2 @@
+xbps-ibstall -S
+xbps-remove -R
