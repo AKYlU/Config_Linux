@@ -18,7 +18,7 @@ systemctl reboot --firmware-setup
 
 sudo visudo
 
-akil ALL=(ALL) NOPASSWD: ALL
+usuario ALL=(ALL) NOPASSWD: ALL
 
 install p7zip-full
 install playerctl
