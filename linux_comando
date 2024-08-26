@@ -63,3 +63,5 @@ sudo update-grub
 
 Reiniciar
 sudo reboot
+
+flatpak update
