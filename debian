@@ -1,21 +1,6 @@
 dar root
 sudo apt-get install lxpolkit
 
-é para tira o 5s
-/etc/default/grub
-GRUB_TIMEOUT=0
-
-para salva o grub
-sudo update-grub
-
-é para ir para bio
-systemctl reboot --firmware-setup
-
-posso desligar o sistema com isso usando atalho
-sudo visudo
-
-akil ALL=(ALL) NOPASSWD: ALL
-
 ele exibe uma lista detalhada de todos os pacotes
 dpkg --get-selections
 
