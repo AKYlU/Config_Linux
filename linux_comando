@@ -7,3 +7,7 @@ sudo update-grub
 
 # é para ir para bio
 systemctl reboot --firmware-setup
+
+sudo visudo
+
+akil ALL=(ALL) NOPASSWD: ALL
