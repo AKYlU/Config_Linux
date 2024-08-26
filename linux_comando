@@ -13,3 +13,8 @@ sudo visudo
 akil ALL=(ALL) NOPASSWD: ALL
 
 install p7zip-full
+install playerctl
+install steam
+install firefox
+install sway
+install flathub
