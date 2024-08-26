@@ -20,3 +20,7 @@ install sway
 install flathub
 install code
 install gnome-boxes
+install gamemode
+
+sudo rm -r /etc/<nome_do_pacote>
+rm -r ~/.config/<nome_do_pacote>
