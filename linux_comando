@@ -4,6 +4,7 @@ top
 free -h
 cd ~
 cd ..
+mkdir
 
 # é para tira o 5s
 /etc/default/grub
