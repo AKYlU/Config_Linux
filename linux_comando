@@ -24,3 +24,6 @@ install gamemode
 
 sudo rm -r /etc/<nome_do_pacote>
 rm -r ~/.config/<nome_do_pacote>
+
+kernel
+uname -a
