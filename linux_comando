@@ -1,1 +1,6 @@
+é para tira o 5s
+/etc/default/grub
+GRUB_TIMEOUT=0
 
+para salva o grub
+sudo update-grub
