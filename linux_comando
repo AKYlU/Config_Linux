@@ -1,3 +1,10 @@
+# comando
+ls -a
+top
+free -h
+cd ~
+cd ..
+
 # é para tira o 5s
 /etc/default/grub
 GRUB_TIMEOUT=0
