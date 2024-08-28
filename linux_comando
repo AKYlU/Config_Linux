@@ -29,6 +29,7 @@ install flathub
 install code
 install gnome-boxes
 install gamemode
+install -t pattern devel_basis java-17-openjdk-devel libopenssl-devel ctags ncurses-devel silversearcher-ag fontconfig ImageMagick ImageMagick-devel software-properties-common git curl
 
 sudo rm -r /etc/<nome_do_pacote>
 rm -r ~/.config/<nome_do_pacote>
