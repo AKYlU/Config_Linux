@@ -62,7 +62,7 @@ sudo zypper install gcc libelf-devel flex bison libopenssl-devel bc libelf-devel
 
 sudo make modules_install install
 
-sudo zypper rm --clean-deps yast2\*
+sudo zypper rm remove yast\*
 sudo rm -r /etc/<nome_do_pacote>
 rm -r ~/.config/<nome_do_pacote>
 
