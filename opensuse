@@ -62,8 +62,18 @@ sudo zypper install gcc libelf-devel flex bison libopenssl-devel bc libelf-devel
 
 sudo make modules_install install
 
+# remover todos os pacotes relacionados ao yast2
 sudo zypper rm remove yast\*
+
+# Marcar Pacotes para Ignorar
 sudo zypper al yast2\*
+
+Verificar os Pacotes Ignorados
+zypper ll
+
+# E para remover um pacote da lista de ignorados 
+sudo zypper rr yast2\*
+
 sudo rm -r /etc/<nome_do_pacote>
 rm -r ~/.config/<nome_do_pacote>
 
