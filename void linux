@@ -8,3 +8,4 @@ sudo ln -s /etc/sv/dbus /var/service
 sudo xbps-install -S liberation-fonts-ttf
 install elogind
 install dbus-elogind
+dbus-launch flatpak run com.unity.UnityHub --args unityhub://2022.3.22f1/887be4894c44
