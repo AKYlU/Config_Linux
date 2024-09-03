@@ -1,3 +1,7 @@
 xbps-ibstall -Syu
 sudo xbps-install void-repo-nonfree
 xbps-remove -R
+dbus-launch
+sudo ln -s /etc/sv/dbus /var/service
+# sudo ln -s /etc/sv/polkitd /var/service
+sudo xbps-install -S liberation-fonts-ttf
