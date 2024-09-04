@@ -63,3 +63,11 @@ Reiniciar
 sudo reboot
 
 flatpak update
+
+x11 apricativo
+login
+install xinit
+install xorg fonts
+
+drack ou claro
+lxappearance
