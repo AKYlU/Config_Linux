@@ -1,10 +1,14 @@
-# comando
+# comando padra
+ls
 ls -a
 top
 free -h
 cd ~
 cd ..
 mkdir
+
+#comando
+ncdu
 
 # é para tira o 5s
 /etc/default/grub
