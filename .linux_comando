@@ -6,6 +6,8 @@ free -h
 cd ~
 cd ..
 mkdir
+lsblk
+cfdisk /dev
 
 #comando
 ncdu
