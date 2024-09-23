@@ -8,6 +8,7 @@ cd ..
 mkdir
 lsblk
 cfdisk /dev
+which
 
 #comando
 ncdu
