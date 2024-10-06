@@ -1,4 +1,6 @@
+#atualiza sistema
 xbps-ibstall -Syu
+
 sudo xbps-install void-repo-nonfree
 xbps-remove -R
 dbus-launch
