@@ -1,7 +1,9 @@
-#atualiza sistema
+# atualiza sistema
 xbps-ibstall -Syu
 
+# repositório não oficial do Void Linux que contém pacotes proprietários ou não-livres
 sudo xbps-install void-repo-nonfree
+
 xbps-remove -R
 dbus-launch
 sudo ln -s /etc/sv/elogind /var/service
