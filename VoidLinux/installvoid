@@ -1,1 +1,19 @@
+# duas patisao de 500m
+# em forrmato fat32 e efi
+# nvme0n1p1
+/boot
+
+# nvme0n1p2
+/boot/efi
+
+# nvme0n1p3 primaria
+/
+
+# instalasao inpotante
+elogind dbus polkit 
+
+# ativar os servicos
+sudo ln -s /etc/sv/elogind /var/service/
+sudo ln -s /etc/sv/dbus /var/service/
+sudo ln -s /etc/sv/polkit /var/service/
 
