@@ -1,0 +1,8 @@
+ Escolhas do kernel
+
+gentoo (gentoo)
+    Kernel padrão com suporte para CPUs K8 (incluindo suporte NUMA) e CPUs EM64T.
+gentoo-nofb
+    O mesmo que gentoo, mas sem suporte framebuffer.
+memtest86 (e)
+    Teste a RAM do sistema para erros.
