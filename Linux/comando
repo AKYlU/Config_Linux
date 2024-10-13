@@ -27,7 +27,7 @@ sudo visudo
 
 usuario ALL=(ALL) NOPASSWD: ALL
 
-install p7zip-full playerctl steam firefox sway flathub gnome-boxes gamemode alacritty  sudo xbps-install -S ttf-opensans
+install p7zip-full playerctl steam firefox sway flathub gnome-boxes gamemode alacritty  sudo xbps-install -S ttf-opensans gamescope
 install -t pattern devel_basis java-17-openjdk-devel libopenssl-devel ctags ncurses-devel silversearcher-ag fontconfig ImageMagick ImageMagick-devel software-properties-common git curl
 
 sudo rm -r /etc/<nome_do_pacote>
