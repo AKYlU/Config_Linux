@@ -19,4 +19,4 @@ sudo ln -s /etc/sv/polkit /var/service/
 
 # akil
 # instalasao inpotante
-mesa-vulkan-radeon wayland xorg-fonts-ttf pipewire wireplumber
+mesa mesa-dri mesa-vulkan-radeon wayland xorg-fonts-ttf pipewire wireplumber
