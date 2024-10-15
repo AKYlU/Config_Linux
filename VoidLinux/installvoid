@@ -18,5 +18,8 @@ sudo ln -s /etc/sv/dbus /var/service/
 sudo ln -s /etc/sv/polkit /var/service/
 
 # akil
+# instalação
+alsamixer
+
 # instalasao inpotante
 mesa mesa-vulkan-radeon vulkan-loader // mesa-dri wayland xorg-fonts pipewire wireplumber
