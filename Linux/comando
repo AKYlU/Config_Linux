@@ -74,3 +74,28 @@ install xorg fonts
 
 drack ou claro
 lxappearance
+
+TOP &     # Deixa em segundo
+PS        # Mostra quase tudo
+FG TOP    # Primeiro plano
+
+W TCH -N1 'FREE -H'/_M   (Incompleto com TOP)
+
+PWD      # Vê onde o consultor
+
+WHEREIS FIREFOX  # Fazendo caminho do FIREFOX
+
+Copia comando Já juro tty  
+. BASH_ALIASES  
+SOURCE ~/.bash_aliases
+
+Como saber o nome [ilegível]
+
+(MAN)  
+CLEAR    # Limpa  
+
+FIND . -NAME nome do comando   # Acha arquivo
+
+DISCO
+
+DF -H
