@@ -10,7 +10,7 @@
 /
 
 # instalasao inpotante
-elogind dbus polkit 
+elogind dbus polkit //
 
 # ativar os servicos
 sudo ln -s /etc/sv/elogind /var/service/
@@ -19,4 +19,4 @@ sudo ln -s /etc/sv/polkit /var/service/
 
 # akil
 # instalasao inpotante
-mesa mesa-dri mesa-vulkan-radeon wayland xorg-fonts-ttf pipewire wireplumber
+mesa mesa-vulkan-radeon vulkan-loader // mesa-dri wayland xorg-fonts pipewire wireplumber
