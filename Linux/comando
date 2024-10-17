@@ -99,3 +99,5 @@ FIND . -NAME nome do comando   # Acha arquivo
 DISCO
 
 DF -H
+
+wlr-randr --output Virtual-1 --mode 1920x1080
