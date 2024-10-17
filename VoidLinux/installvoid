@@ -23,3 +23,22 @@ alsamixer
 
 # instalasao inpotante
 mesa mesa-vulkan-radeon vulkan-loader // mesa-dri wayland xorg-fonts pipewire wireplumber
+
+# arquivo run
+
+#!/bin/sh
+
+tty=${PWD##*-}
+
+[ -r conf ] && . ./conf
+
+if [ -x /sbin/getty -o -x /bin/getty ]; then
+	# busybox
+	GETTY=getty
+elif [ -x /sbin/agetty -o -x /bin/agetty ]; then
+	# util-linux
+	GETTY=agetty
+fi
+
+exec chpst -P ${GETTY} ${GETTY_ARGS} \
+	"${tty}" "${BAUD_RATE}" "${TERM_NAME}" --autologin akil
