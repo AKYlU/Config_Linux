@@ -42,3 +42,8 @@ fi
 
 exec chpst -P ${GETTY} ${GETTY_ARGS} \
 	"${tty}" "${BAUD_RATE}" "${TERM_NAME}" --autologin akil
+
+/.bash_profile finaldo arquivo
+if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
+    dbus-launch gamescope -- flatpak run com.valvesoftware.Steam
+fi
