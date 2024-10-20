@@ -47,3 +47,5 @@ exec chpst -P ${GETTY} ${GETTY_ARGS} \
 if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
     dbus-launch gamescope -- flatpak run com.valvesoftware.Steam
 fi
+
+sudo xbps-install -S xdg-desktop-portal xdg-desktop-portal-wlr
