@@ -101,3 +101,6 @@ DISCO
 DF -H
 
 wlr-randr --output Virtual-1 --mode 1920x1080
+
+Fontes Japonesas
+noto-fonts-cjk font-misc-misc ipafont-fonts-otf font-jis-misc
