@@ -2,7 +2,6 @@ Dash: Uma versão mais leve do Bourne shell, ideal para scripts simples.
 Zsh: Embora tenha muitos recursos, pode ser otimizado para ser leve.
 Fish: Focado na interatividade e usabilidade, mas com mais overhead do que o Dash.
 Ash: Um shell muito leve que é frequentemente usado em sistemas embarcados.
-
 BusyBox: É uma coleção de utilitários Unix em um único executável, incluindo uma shell básica (sh). É leve e frequentemente usado em ambientes embarcados.
 Sh (Bourne shell): Se já estiver presente no seu sistema, você pode utilizá-lo como uma shell básica.
 
