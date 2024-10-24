@@ -9,3 +9,21 @@ Sh (Bourne shell): Se já estiver presente no seu sistema, você pode utilizá-l
 runit: Um sistema de inicialização leve e simples.
 s6: Um sistema de inicialização e supervisão com foco em minimalismo.
 OpenRC: Um sistema de gerenciamento de serviços que pode ser usado em distribuições baseadas em Gentoo.
+
+[jupiter-main], [holo-main], [core-main], [extra-main]:
+
+    São usados pelo Steam Deck 
+
+[multilib-main]: Fornece bibliotecas de 32 bits para sistemas de 64 bits, úteis para compatibilidade com jogos.
+
+# vou testar
+LILO framebuffer
+
+# vou abaixar 
+sudo xbps-install -S xboxdrv steam-devices
+sudo xbps-install -S mesa mesa-vulkan-radeon lib32-mesa lib32-mesa-vulkan-radeon
+sudo xbps-install -S vulkan-loader lib32-vulkan-loader
+sudo xbps-install -S noto-fonts onboard zenity dialog
+
+
+
