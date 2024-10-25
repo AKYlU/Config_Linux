@@ -5,7 +5,7 @@
 
 # Verificar se está no Wayland e na tty1
 if [ -z "$WAYLAND_DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
-   dbus-launch gamescope --fsr --prefer-vk -r 120 -o 0 -e -- flatpak run --nofilesystem=home com.valvesoftware.Steam
+   gamescope --fsr -r 120 -- steam
 fi
 
 # Abrir Firefox na tty2 usando gamescope
