@@ -30,3 +30,7 @@ steam_notif_daemon
 
 # install 
 steamos
+
+
+# ativar Big Picture 
+steam -tenfoot  -gamepadui
