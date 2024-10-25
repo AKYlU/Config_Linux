@@ -13,8 +13,8 @@ OpenRC: Um sistema de gerenciamento de serviços que pode ser usado em distribui
 [jupiter-main], [holo-main], [core-main], [extra-main]:
 [multilib-main]: Fornece bibliotecas de 32 bits para sistemas de 64 bits, úteis para compatibilidade com jogos.
 
-# vou testar
-LILO framebuffer
+# vou testar 
+framebuffer EFISTUB
 
 # vou abaixar 
 # contrle??
