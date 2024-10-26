@@ -1,1 +1,12 @@
 mkfs.vfat -F32 /dev/nvme0n1p2
+
+mkdir -p /mnt/gentoo/boot
+mount /dev/nvme0n1p1 /mnt/gentoo/boot
+
+mkdir -p /mnt/gentoo/boot/efi
+mount /dev/nvme0n1p2 /mnt/gentoo/boot/efi
+
+btrfs
+mkfs.btrfs /dev/nvme0n1p3
+mkdir -p /mnt/gentoo
+mount /dev/nvme0n1p3 /mnt/gentoo
