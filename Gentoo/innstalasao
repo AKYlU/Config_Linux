@@ -1,0 +1,1 @@
+mkfs.vfat -F32 /dev/nvme0n1p2
