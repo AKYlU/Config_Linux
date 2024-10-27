@@ -1,6 +1,9 @@
+lsblk
+cfdisk /dev/
+
 mkfs.vfat -F32 /dev/nvme0n1p1
 mkfs.vfat -F32 /dev/nvme0n1p2
-mkfs.ext4 /dev/nvme0n1p2
+mkfs.ext4 /dev/nvme0n1p3
 
 btrfs
 mkfs.btrfs /dev/nvme0n1p3
@@ -27,6 +30,7 @@ cp /etc/resolv.conf etc && chroot . /bin/bash
 source /etc/profile
 
 emerge-webrsync
+passwd
 useradd -g users -G wheel,portage,audio,video,usb,cdrom -m akil
 passwd akil
 emerge -vq vim
