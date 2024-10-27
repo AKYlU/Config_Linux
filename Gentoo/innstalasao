@@ -31,8 +31,22 @@ useradd -g users -G wheel,portage,audio,video,usb,cdrom -m akil
 passwd akil
 emerge -vq vim
 
-/etc/fstab
+vim /etc/fstab
 nvme0n1p1     /efi        vfat    defaults,noatime    1 2
 nvme0n1p3     /           btrfs   noatime             0 1
 /dev/cdrom    /mnt/cdrom  auto    noauto,ro           0 0
+
+vim /etc/portage/make.conf
+# Estas configurações foram definidas pelo script Catalyst que construiu este stage.
+COMMON_FLAGS="-O2 -pipe"
+CFLAGS="${COMMON_FLAGS}"
+CXXFLAGS="${COMMON_FLAGS}"
+FCFLAGS="${COMMON_FLAGS}"
+FFLAGS="${COMMON_FLAGS}"
+
+# Esta stage foi construída com a flag bindist habilitada.
+USE="dist-kernel"
+
+# Esta configuração define o idioma do output do build para inglês.
+LC_MESSAGES=C.utf8
 
