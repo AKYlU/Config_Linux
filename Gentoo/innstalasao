@@ -1,30 +1,32 @@
+# ver o Disco
 lsblk
 cfdisk /dev/nvme0n1 
 
+# formato 
 mkfs.vfat -F32 /dev/nvme0n1p1
 mkfs.vfat -F32 /dev/nvme0n1p2
 mkfs.btrfs /dev/nvme0n1p3
 
+# cria arquivo
 mkdir -p /boot
-mount /dev/nvme0n1p2 /boot
-
 mkdir -p /efi
-mount /dev/nvme0n1p1 /efi
-mount /dev/nvme0n1p1 /efi
-
 mkdir -p /mnt/gentoo
-mount /dev/nvme0n1p3 /mnt/gentoo
-
 mkdir -p /mnt/gentoo/boot
-mount /dev/nvme0n1p1 /mnt/gentoo/boot
-
 mkdir -p /mnt/gentoo/boot/efi
+
+# moutar paticsao?
+mount /dev/nvme0n1p2 /boot
+mount /dev/nvme0n1p1 /efi
+mount /dev/nvme0n1p3 /mnt/gentoo
+mount /dev/nvme0n1p1 /mnt/gentoo/boot
 mount /dev/nvme0n1p2 /mnt/gentoo/boot/efi
 
+# é claro como sistema D
 cd /mnt/gentoo
 wget https://distfiles.gentoo.org/releases/amd64/autobuilds/20241020T170324Z/stage3-amd64-desktop-openrc-20241020T170324Z.tar.xz
 tar xpf stage3-amd64-desktop-openrc-20241020T170324Z.tar.xz 
 
+# é para montar nao sei o que
 mount --types proc /proc /mnt/gentoo/proc
 mount --rbind /sys /mnt/gentoo/sys
 mount --make-rslave /mnt/gentoo/sys
@@ -35,12 +37,14 @@ mount --make-slave /mnt/gentoo/run
 cp /etc/resolv.conf etc && chroot . /bin/bash 
 source /etc/profile
 
+# para atualizar e para colocar senha nos usuário
 emerge-webrsync
 passwd
 useradd -g users -G wheel,portage,audio,video,usb,cdrom -m akil
 passwd akil
 emerge -vq vim
 
+# é para determinar as partições?
 vim /etc/fstab
 /dev/nvme0n1p1     /efi        vfat    defaults,noatime    1 2
 /dev/nvme0n1p3     /           btrfs   noatime             0 1
@@ -50,6 +54,7 @@ PARTLABEL=ESP     /efi        vfat    noauto,noatime    1 2
 PARTLABEL=Root    /           btrfs    noatime          0 1
 /dev/cdrom        /mnt/cdrom  auto    noauto,ro         0 0
 
+# uma das configurações do kernel
 vim /etc/portage/make.conf
 # Estas configurações foram definidas pelo script Catalyst que construiu este stage.
 COMMON_FLAGS="-O2 -pipe"
@@ -64,6 +69,7 @@ USE="dist-kernel"
 # Esta configuração define o idioma do output do build para inglês.
 LC_MESSAGES=C.utf8
 
+# kernel
 echo "sys-kernel/linux-firmware @BINARY-REDISTRIBUTABLE" | tee -a /etc/portage/package.license
 emerge -av sys-kernel/gentoo-sources sys-kernel/linux-firmware sys-kernel/installkernel
 ln -s /usr/src/linux* /usr/src/linux
@@ -75,6 +81,7 @@ make -j12
 make modules_install 
 make install 
 
+# GRUB
 echo 'GRUB_PLATFORMS="efi-64"' >> /etc/portage/make.conf
 emerge --ask sys-boot/grub
 grub-install --efi-directory=/efi
@@ -83,6 +90,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 rc-update add dhcpcd default
 rc-service dhcpcd start
 
+# fim
 exit 
 umount -R /mnt/gentoo
 reboot
