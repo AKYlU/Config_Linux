@@ -63,6 +63,17 @@ USE="dist-kernel"
 # Esta configuração define o idioma do output do build para inglês.
 LC_MESSAGES=C.utf8
 
+echo "sys-kernel/linux-firmware @BINARY-REDISTRIBUTABLE" | tee -a /etc/portage/package.license
+emerge -av sys-kernel/gentoo-sources sys-kernel/linux-firmware sys-kernel/installkernel
+ln -s /usr/src/linux* /usr/src/linux
+cd /usr/src/linux-
+make menuconfig
+make -j12
+make localyesconfig
+make -j12
+make modules_install 
+make install 
+
 echo 'GRUB_PLATFORMS="efi-64"' >> /etc/portage/make.conf
 emerge --ask sys-boot/grub
 grub-install --efi-directory=/efi
