@@ -13,12 +13,9 @@ mount /dev/nvme0n1p1 /mnt/gentoo/boot
 mkdir -p /mnt/gentoo/boot/efi
 mount /dev/nvme0n1p2 /mnt/gentoo/boot/efi
 
-
-
 cd /mnt/gentoo
 tar xpf stage3-amd64-desktop-openrc-20241020T170324Z.tar.xz 
 
-cd /mnt/gentoo
 mount --types proc /proc /mnt/gentoo/proc
 mount --rbind /sys /mnt/gentoo/sys
 mount --make-rslave /mnt/gentoo/sys
@@ -34,4 +31,8 @@ useradd -g users -G wheel,portage,audio,video,usb,cdrom -m akil
 passwd akil
 emerge -vq vim
 
-emerge --ask dosfstools
+/etc/fstab
+nvme0n1p1     /efi        vfat    defaults,noatime    1 2
+nvme0n1p3     /           btrfs   noatime             0 1
+/dev/cdrom    /mnt/cdrom  auto    noauto,ro           0 0
+
