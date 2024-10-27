@@ -30,3 +30,5 @@ emerge-webrsync
 passwd
 useradd -g users -G wheel,portage,audio,video,usb,cdrom -m username 
 emerge -vq vim
+
+emerge --ask dosfstools
