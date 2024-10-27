@@ -1,4 +1,5 @@
-mkfs.vfat -F32 /dev/nvme0n1p2
+mkfs.vfat -F32 /dev/nvme0n1p1
+mkfs.ext4 /dev/nvme0n1p2
 
 mkdir -p /mnt/gentoo/boot
 mount /dev/nvme0n1p1 /mnt/gentoo/boot
@@ -27,4 +28,5 @@ source /etc/profile
 
 emerge-webrsync
 passwd
+useradd -g users -G wheel,portage,audio,video,usb,cdrom -m username 
 emerge -vq vim
