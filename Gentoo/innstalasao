@@ -8,6 +8,9 @@ mkfs.btrfs /dev/nvme0n1p3
 mkdir -p /boot
 mount /dev/nvme0n1p2 /boot
 
+mkdir -p /efi
+mount /dev/nvme0n1p1 /efi
+
 mkdir -p /mnt/gentoo
 mount /dev/nvme0n1p3 /mnt/gentoo
 
@@ -59,9 +62,6 @@ USE="dist-kernel"
 
 # Esta configuração define o idioma do output do build para inglês.
 LC_MESSAGES=C.utf8
-
-mkdir -p /efi
-mount /dev/nvme0n1p1 /efi
 
 echo 'GRUB_PLATFORMS="efi-64"' >> /etc/portage/make.conf
 emerge --ask sys-boot/grub
