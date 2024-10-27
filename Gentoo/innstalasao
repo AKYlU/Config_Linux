@@ -40,6 +40,10 @@ nvme0n1p1     /efi        vfat    defaults,noatime    1 2
 nvme0n1p3     /           btrfs   noatime             0 1
 /dev/cdrom    /mnt/cdrom  auto    noauto,ro           0 0
 
+PARTLABEL=ESP     /efi        vfat    noauto,noatime    1 2
+PARTLABEL=Root    /           ext4    noatime           0 1
+/dev/cdrom        /mnt/cdrom  auto    noauto,ro         0 0
+
 vim /etc/portage/make.conf
 # Estas configurações foram definidas pelo script Catalyst que construiu este stage.
 COMMON_FLAGS="-O2 -pipe"
