@@ -10,6 +10,7 @@ mount /dev/nvme0n1p2 /boot
 
 mkdir -p /efi
 mount /dev/nvme0n1p1 /efi
+mount /dev/nvme0n1p1 /efi
 
 mkdir -p /mnt/gentoo
 mount /dev/nvme0n1p3 /mnt/gentoo
