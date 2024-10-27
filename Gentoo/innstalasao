@@ -87,6 +87,7 @@ emerge --ask sys-boot/grub
 grub-install --efi-directory=/efi
 grub-mkconfig -o /boot/grub/grub.cfg
 
+# net
 rc-update add dhcpcd default
 rc-service dhcpcd start
 
