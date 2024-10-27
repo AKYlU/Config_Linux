@@ -63,6 +63,15 @@ emerge --ask sys-boot/grub
 grub-install --efi-directory=/efi
 grub-mkconfig -o /boot/grub/grub.cfg
 
+echo 'GRUB_PLATFORMS="efi-64"' >> /etc/portage/make.conf
+emerge --ask sys-boot/grub
+grub-install --target=x86_64-efi --efi-directory=/boot/efi
+grub-mkconfig -o /boot/grub/grub.cfg
+
+emerge --ask net-misc/dhcpcd
+rc-update add dhcpcd default
+rc-service dhcpcd start
+
 exit 
 umount -R /mnt/gentoo
 reboot
