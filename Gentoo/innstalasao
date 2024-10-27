@@ -15,6 +15,7 @@ mkdir -p /mnt/gentoo/boot/efi
 mount /dev/nvme0n1p2 /mnt/gentoo/boot/efi
 
 cd /mnt/gentoo
+wget https://distfiles.gentoo.org/releases/amd64/autobuilds/20241020T170324Z/stage3-amd64-desktop-openrc-20241020T170324Z.tar.xz
 tar xpf stage3-amd64-desktop-openrc-20241020T170324Z.tar.xz 
 
 mount --types proc /proc /mnt/gentoo/proc
