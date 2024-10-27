@@ -1,5 +1,11 @@
 mkfs.vfat -F32 /dev/nvme0n1p1
+mkfs.vfat -F32 /dev/nvme0n1p2
 mkfs.ext4 /dev/nvme0n1p2
+
+btrfs
+mkfs.btrfs /dev/nvme0n1p3
+mkdir -p /mnt/gentoo
+mount /dev/nvme0n1p3 /mnt/gentoo
 
 mkdir -p /mnt/gentoo/boot
 mount /dev/nvme0n1p1 /mnt/gentoo/boot
@@ -7,10 +13,7 @@ mount /dev/nvme0n1p1 /mnt/gentoo/boot
 mkdir -p /mnt/gentoo/boot/efi
 mount /dev/nvme0n1p2 /mnt/gentoo/boot/efi
 
-btrfs
-mkfs.btrfs /dev/nvme0n1p3
-mkdir -p /mnt/gentoo
-mount /dev/nvme0n1p3 /mnt/gentoo
+
 
 cd /mnt/gentoo
 tar xpf stage3-amd64-desktop-openrc-20241020T170324Z.tar.xz 
@@ -27,8 +30,8 @@ cp /etc/resolv.conf etc && chroot . /bin/bash
 source /etc/profile
 
 emerge-webrsync
-passwd
-useradd -g users -G wheel,portage,audio,video,usb,cdrom -m username 
+useradd -g users -G wheel,portage,audio,video,usb,cdrom -m akil
+passwd akil
 emerge -vq vim
 
 emerge --ask dosfstools
