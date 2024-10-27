@@ -1,12 +1,10 @@
 lsblk
-cfdisk /dev/
+cfdisk /dev/nvme0n1 
 
 mkfs.vfat -F32 /dev/nvme0n1p1
 mkfs.vfat -F32 /dev/nvme0n1p2
-mkfs.ext4 /dev/nvme0n1p3
-
-btrfs
 mkfs.btrfs /dev/nvme0n1p3
+
 mkdir -p /mnt/gentoo
 mount /dev/nvme0n1p3 /mnt/gentoo
 
@@ -41,7 +39,7 @@ nvme0n1p3     /           btrfs   noatime             0 1
 /dev/cdrom    /mnt/cdrom  auto    noauto,ro           0 0
 
 PARTLABEL=ESP     /efi        vfat    noauto,noatime    1 2
-PARTLABEL=Root    /           ext4    noatime           0 1
+PARTLABEL=Root    /           btrfs    noatime          0 1
 /dev/cdrom        /mnt/cdrom  auto    noauto,ro         0 0
 
 vim /etc/portage/make.conf
