@@ -95,3 +95,8 @@ rc-service dhcpcd start
 exit 
 umount -R /mnt/gentoo
 reboot
+
+# e depois
+mount -o remount,rw /dev/nvme0n1 /
+dispatch-conf
+
