@@ -14,6 +14,9 @@ OpenRC: Um sistema de gerenciamento de serviços que pode ser usado em distribui
 # vou testar 
 framebuffer EFISTUB
 
+# fazer que fusione
+Setad
+
 # vou abaixar 
 # contrle??
 sudo xbps-install -S xboxdrv steam-devices
