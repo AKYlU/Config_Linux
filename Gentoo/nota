@@ -6,3 +6,5 @@ gentoo-nofb
     O mesmo que gentoo, mas sem suporte framebuffer.
 memtest86 (e)
     Teste a RAM do sistema para erros.
+ xhost +SI:localuser:akil
+ mount -o remount,rw /dev/nvme0n1 /
