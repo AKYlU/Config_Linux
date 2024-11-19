@@ -55,6 +55,7 @@ make
 
 Instalar los módulos del kernel
 sudo make modules_install
+yes n | make localmodconfig
 
 Instalar el kernel
 sudo make install
