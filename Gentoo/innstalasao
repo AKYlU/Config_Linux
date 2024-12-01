@@ -8,11 +8,34 @@ mkfs.vfat -F32 /dev/nvme0n1p2
 mkfs.btrfs /dev/nvme0n1p3
 
 # cria arquivo
-mkdir -p /boot
-mkdir -p /efi
-mkdir -p /mnt/gentoo
-mkdir -p /mnt/gentoo/boot
-mkdir -p /mnt/gentoo/boot/efi
+mkdir -p /mnt/gentoo/
+mount /dev/nvme0n1p3 /mnt/gentoo
+mkdir -p /mnt/gentoo/efi
+mount /dev/nvme0n1p1 /mnt/gentoo/efi
+
+chronyd -q
+
+cd /mnt/gentoo
+
+wget https://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-openrc/stage3-amd64-openrc-XXXXXXXXXXXXXXX.tar.xz
+
+tar xpvf
+
+cp -L /etc/resolv.conf etc && arch-chroot .
+
+emerge-webrsync 
+
+emerge sys-boot/efibootmgr
+
+emerge --ask app-portage/cpuid2cpuflags 
+
+cpuid2cpuflags 
+
+echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags 
+
+emerge -avuDN @world
+
+passwd
 
 # moutar paticsao?
 mount /dev/nvme0n1p2 /boot
