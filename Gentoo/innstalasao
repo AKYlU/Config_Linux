@@ -46,6 +46,13 @@ ln -sf /usr/share/zoneinfo/Europe/Helsinki /etc/localtime
 nano /etc/portage/make.conf
 USE="dist-kernel"
 
+mkdir -p /etc/portage/package.license 
+echo "sys-kernel/linux-firmware linux-fw-redistributable" >> /etc/portage/package.license/linux-firmware 
+emerge --ask sys-kernel/linux-firmware
+
+etc-update
+dispatch-conf
+
 cd /usr/src/
 wget kernel
 
