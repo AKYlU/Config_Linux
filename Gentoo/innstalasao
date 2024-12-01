@@ -37,6 +37,29 @@ emerge -avuDN @world
 
 passwd
 
+useradd -g users -G wheel,portage,audio,video,usb,cdrom -m akil
+
+passwd username
+
+ln -sf /usr/share/zoneinfo/Europe/Helsinki /etc/localtime
+
+nano /etc/portage/make.conf
+USE="dist-kernel"
+
+cd /usr/src/
+wget kernel
+
+emerge --ask sys-devel/llvm sys-devel/clang
+
+export CC=clang
+export LD=ld.lld
+export AR=llvm-ar
+export NM=llvm-nm
+export OBJCOPY=llvm-objcopy
+export OBJDUMP=llvm-objdump
+export STRIP=llvm-strip
+
+
 # moutar paticsao?
 mount /dev/nvme0n1p2 /boot
 mount /dev/nvme0n1p1 /efi
