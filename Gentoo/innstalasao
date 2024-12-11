@@ -39,7 +39,7 @@ passwd
 
 useradd -g users -G wheel,portage,audio,video,usb,cdrom -m akil
 
-passwd username
+passwd akil
 
 ln -sf /usr/share/zoneinfo/Europe/Helsinki /etc/localtime
 
@@ -73,6 +73,18 @@ mount /dev/nvme0n1p1 /efi
 mount /dev/nvme0n1p3 /mnt/gentoo
 mount /dev/nvme0n1p1 /mnt/gentoo/boot
 mount /dev/nvme0n1p2 /mnt/gentoo/boot/efi
+
+echo "sys-kernel/installkernel dracut" >> /etc/portage/package.use/installkernel 
+emerge --ask sys-kernel/installkernel sys-kernel/gentoo-kernel-bin
+
+rc-update add dhcpcd default
+rc-service dhcpcd start
+
+nano /etc/portage/package.use/sysklogd
+emerge --ask app-admin/sysklogd 
+rc-update add sysklogd default 
+rc-update add cronie default
+
 
 # é claro como sistema D
 cd /mnt/gentoo
