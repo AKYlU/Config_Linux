@@ -51,10 +51,10 @@ USE="dist-kernel"
 
 mkdir -p /etc/portage/package.license 
 echo "sys-kernel/linux-firmware linux-fw-redistributable" >> /etc/portage/package.license/linux-firmware 
+dispatch-conf
 emerge --ask sys-kernel/linux-firmware
 
 etc-update
-dispatch-conf
 
 cd /usr/src/
 wget kernel
