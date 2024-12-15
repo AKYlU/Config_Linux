@@ -26,6 +26,9 @@ cp -L /etc/resolv.conf etc && arch-chroot .
 emerge-webrsync 
 
 emerge sys-boot/efibootmgr
+rc-update add kernel-bootcfg-boot-successful default
+cp arch/x86/boot/bzImage /efi/EFI/example/bzImage.efi
+efibootmgr --create --disk /dev/nvme0n1p3 --label "Gentoo EFI Stub" --loader "\EFI\example\bzImage.efi" -u "root=/dev/nvme0n1p3"
 
 emerge --ask app-portage/cpuid2cpuflags 
 
