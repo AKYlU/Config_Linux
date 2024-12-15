@@ -25,11 +25,6 @@ cp -L /etc/resolv.conf etc && arch-chroot .
 
 emerge-webrsync 
 
-emerge sys-boot/efibootmgr
-rc-update add kernel-bootcfg-boot-successful default
-cp arch/x86/boot/bzImage /efi/EFI/example/bzImage.efi
-efibootmgr --create --disk /dev/nvme0n1p3 --label "Gentoo EFI Stub" --loader "\EFI\example\bzImage.efi" -u "root=/dev/nvme0n1p3"
-
 emerge --ask app-portage/cpuid2cpuflags 
 
 cpuid2cpuflags 
@@ -58,21 +53,10 @@ kernel
 echo "sys-kernel/installkernel dracut" >> /etc/portage/package.use/installkernel 
 emerge --ask sys-kernel/installkernel sys-kernel/gentoo-kernel-bin
 
-etc-update
-
-cd /usr/src/
-wget kernel
-
-emerge --ask sys-devel/llvm sys-devel/clang
-
-export CC=clang
-export LD=ld.lld
-export AR=llvm-ar
-export NM=llvm-nm
-export OBJCOPY=llvm-objcopy
-export OBJDUMP=llvm-objdump
-export STRIP=llvm-strip
-
+emerge sys-boot/efibootmgr
+rc-update add kernel-bootcfg-boot-successful default
+cp arch/x86/boot/bzImage /efi/EFI/example/bzImage.efi
+efibootmgr --create --disk /dev/nvme0n1p3 --label "Gentoo EFI Stub" --loader "\EFI\example\bzImage.efi" -u "root=/dev/nvme0n1p3"
 
 # moutar paticsao?
 mount /dev/nvme0n1p2 /boot
@@ -96,4 +80,18 @@ rc-update add cronie default
 exit 
 reboot
 
+etc-update
+
+cd /usr/src/
+wget kernel
+
+emerge --ask sys-devel/llvm sys-devel/clang
+
+export CC=clang
+export LD=ld.lld
+export AR=llvm-ar
+export NM=llvm-nm
+export OBJCOPY=llvm-objcopy
+export OBJDUMP=llvm-objdump
+export STRIP=llvm-strip
 
