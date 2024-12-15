@@ -54,6 +54,10 @@ echo "sys-kernel/linux-firmware linux-fw-redistributable" >> /etc/portage/packag
 dispatch-conf
 emerge --ask sys-kernel/linux-firmware
 
+kernel
+echo "sys-kernel/installkernel dracut" >> /etc/portage/package.use/installkernel 
+emerge --ask sys-kernel/installkernel sys-kernel/gentoo-kernel-bin
+
 etc-update
 
 cd /usr/src/
