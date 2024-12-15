@@ -80,6 +80,7 @@ mount /dev/nvme0n1p2 /mnt/gentoo/boot/efi
 echo "sys-kernel/installkernel dracut" >> /etc/portage/package.use/installkernel 
 emerge --ask sys-kernel/installkernel sys-kernel/gentoo-kernel-bin
 
+#net
 rc-update add dhcpcd default
 rc-service dhcpcd start
 
@@ -88,5 +89,7 @@ emerge --ask app-admin/sysklogd
 rc-update add sysklogd default 
 rc-update add cronie default
 
+exit 
+reboot
 
 
