@@ -15,14 +15,18 @@ mount /dev/nvme0n1p1 /mnt/gentoo/efi
 
 chronyd -q
 
+# ir para o diretório
 cd /mnt/gentoo
 
+# abaixar o linux
 wget https://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-openrc/stage3-amd64-openrc-XXXXXXXXXXXXXXX.tar.xz
 
+# extrai o arquivo
 tar xpvf
 
 cp -L /etc/resolv.conf etc && arch-chroot .
 
+# atualizar o sistema
 emerge-webrsync 
 
 emerge --ask app-portage/cpuid2cpuflags 
@@ -31,12 +35,16 @@ cpuid2cpuflags
 
 echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags 
 
+# atualizar o grupo
 emerge -avuDN @world
 
+# senha de root
 passwd
 
+# colocar no grupo
 useradd -g users -G wheel,portage,audio,video,usb,cdrom -m akil
 
+# senha do usuário 
 passwd akil
 
 ln -sf /usr/share/zoneinfo/Europe/Helsinki /etc/localtime
@@ -44,6 +52,7 @@ ln -sf /usr/share/zoneinfo/Europe/Helsinki /etc/localtime
 nano /etc/portage/make.conf
 USE="dist-kernel"
 
+# abaixar firmware
 mkdir -p /etc/portage/package.license 
 echo "sys-kernel/linux-firmware linux-fw-redistributable" >> /etc/portage/package.license/linux-firmware 
 emerge --ask sys-kernel/linux-firmware
@@ -53,6 +62,7 @@ kernel
 echo "sys-kernel/installkernel dracut" >> /etc/portage/package.use/installkernel 
 emerge --ask sys-kernel/installkernel sys-kernel/gentoo-kernel-bin
 
+# inicializar o boot com efi
 emerge sys-boot/efibootmgr
 rc-update add kernel-bootcfg-boot-successful default
 cp /boot/vmlinuz-6.6.62-gentoo-dist /efi/
@@ -61,7 +71,7 @@ efibootmgr --create --disk /dev/nvme0n1p3 --label "Gentoo EFI Stub" --loader "/e
 echo "sys-kernel/installkernel dracut" >> /etc/portage/package.use/installkernel 
 emerge --ask sys-kernel/installkernel sys-kernel/gentoo-kernel-bin
 
-#net
+# net
 rc-update add dhcpcd default
 rc-service dhcpcd start
 
