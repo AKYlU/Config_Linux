@@ -68,9 +68,6 @@ mkdir -p /boot/efi/boot
 cp /boot/vmlinuz /boot/efi/boot/bootx64.efi
 # efibootmgr -c -d /dev/nvme0n1p -p 1 -L "Gentoo" -L "\efi\boot\bootx64.efi
 
-echo "sys-kernel/installkernel dracut" >> /etc/portage/package.use/installkernel 
-emerge --ask sys-kernel/installkernel sys-kernel/gentoo-kernel-bin
-
 # net
 rc-update add dhcpcd default
 rc-service dhcpcd start
