@@ -19,7 +19,7 @@ chronyd -q
 cd /mnt/gentoo
 
 # abaixar o linux
-wget https://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-openrc/stage3-amd64-openrc-XXXXXXXXXXXXXXX.tar.xz
+wget link musl | llvm | openrc
 
 # extrai o arquivo
 tar xpvf
