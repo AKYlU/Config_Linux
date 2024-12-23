@@ -80,5 +80,33 @@ rc-update add cronie default
 exit 
 reboot
 
+# elogind
+emerge --ask sys-auth/elogind
 /etc/portage/make.conf
 USE="elogind -systemd"
+rc-update add elogind boot
+
+# sway
+emerge --ask gui-wm/sway
+emerge --ask gui-apps/foot
+
+# firefox
+emerge --ask www-client/firefox:esr
+GDK_BACKEND="wayland" firefox
+
+# dbus
+emerge --ask sys-apps/dbus
+rc-update add dbus default
+
+# Polkit
+emerge --ask sys-auth/polkit
+rc-update add polkit default
+
+# Mesa
+emerge --ask x11-libs/mesa
+
+# Dejavu Fonts
+emerge -av media-fonts/dejavu
+
+
+
