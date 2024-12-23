@@ -80,18 +80,5 @@ rc-update add cronie default
 exit 
 reboot
 
-etc-update
-
-cd /usr/src/
-wget kernel
-
-emerge --ask sys-devel/llvm sys-devel/clang
-
-export CC=clang
-export LD=ld.lld
-export AR=llvm-ar
-export NM=llvm-nm
-export OBJCOPY=llvm-objcopy
-export OBJDUMP=llvm-objdump
-export STRIP=llvm-strip
-
+/etc/portage/make.conf
+USE="elogind -systemd"
