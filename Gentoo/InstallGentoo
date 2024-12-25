@@ -108,5 +108,6 @@ emerge --ask x11-libs/mesa
 # Dejavu Fonts
 emerge -av media-fonts/dejavu
 
-
+# atualiza tudo
+emerge --ask --changed-use --deep @world
 
