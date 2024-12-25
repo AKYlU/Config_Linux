@@ -108,6 +108,13 @@ emerge --ask x11-libs/mesa
 # Dejavu Fonts
 emerge -av media-fonts/dejavu
 
+sudo emaint sync -a
+echo "=games-action/prismlauncher-9999 **" | sudo tee -a /etc/portage/package.accept_keywords/prismlauncher
+sudo emerge --ask games-action/prismlauncher
+sudo nano /etc/portage/package.use/custom
+dev-libs/quazip qt6
+sys-libs/zlib minizip
+
 # atualiza tudo
 emerge --ask --changed-use --deep @world
 
