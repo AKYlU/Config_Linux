@@ -121,6 +121,10 @@ emerge --ask dev-java/openjdk-bin:21
 eselect java-vm list
 eselect java-vm set system <número>
 
+# steam 
+echo "games-util/game-device-udev-rules ~amd64" >> /etc/portage/package.accept_keywords
+
+
 # atualiza tudo
 emerge --ask --changed-use --deep @world
 
