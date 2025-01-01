@@ -124,6 +124,8 @@ eselect java-vm set system <número>
 # steam 
 echo "games-util/game-device-udev-rules ~amd64" >> /etc/portage/package.accept_keywords
 
+# wine
+emerge -C llvm-runtimes/libunwind
 
 # atualiza tudo
 emerge --ask --changed-use --deep @world
