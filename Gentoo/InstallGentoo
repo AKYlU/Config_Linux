@@ -1,3 +1,5 @@
+# https://wiki.gentoo.org/wiki/User:Pietinger/Draft/Quick_Installation_OpenRC_for_an_UEFI_System
+
 # ver o Disco
 lsblk
 cfdisk /dev/nvme0n1 
