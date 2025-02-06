@@ -7,11 +7,12 @@ cfdisk /dev/nvme0n1
 # formato 
 mkfs.vfat -F32 /dev/nvme0n1p1
 mkfs.vfat -F32 /dev/nvme0n1p2
-mkfs.btrfs /dev/nvme0n1p3
+mkswap /dev/nvme0n1p3 && swapon /dev/nvme0n1p3
+mkfs.btrfs /dev/nvme0n1p4
 
 # cria arquivo
 mkdir -p /mnt/gentoo/
-mount /dev/nvme0n1p3 /mnt/gentoo
+mount /dev/nvme0n1p4 /mnt/gentoo
 mkdir -p /mnt/gentoo/efi
 mount /dev/nvme0n1p1 /mnt/gentoo/efi
 
