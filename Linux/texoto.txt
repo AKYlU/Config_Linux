@@ -24,7 +24,10 @@ sudo xbps-install -S xboxdrv steam-devices
 # e drive
 sudo xbps-install -S mesa mesa-vulkan-radeon lib32-mesa lib32-mesa-vulkan-radeon
 sudo xbps-install -S vulkan-loader lib32-vulkan-loader
-sudo xbps-install -S noto-fonts onboard zenity dialog
+sudo xbps-install -S noto-fonts 
+
+# teclado vitual
+onboard zenity dialog
 
 
 # Sample .bashrc for SUSE Linux
