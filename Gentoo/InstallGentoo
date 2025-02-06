@@ -87,15 +87,18 @@ rc-update add cronie default
 exit 
 reboot
 
+# wayland
+emerge --ask dev-libs/wayland
+
 # elogind
 emerge --ask sys-auth/elogind
 /etc/portage/make.conf
 USE="elogind -systemd"
 rc-update add elogind boot
 
-# sway
-emerge --ask gui-wm/sway
-emerge --ask gui-apps/foot
+# wayfire
+emerge --ask gui-wm/wayfire
+emerge --ask x11-terms/kitty
 
 # firefox
 emerge --ask www-client/firefox:esr
@@ -105,7 +108,7 @@ GDK_BACKEND="wayland" firefox
 emerge --ask sys-apps/dbus
 rc-update add dbus default
 
-# Polkit
+# Polkit flathub ja tem
 emerge --ask sys-auth/polkit
 rc-update add polkit default
 
