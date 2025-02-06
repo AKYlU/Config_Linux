@@ -108,6 +108,10 @@ GDK_BACKEND="wayland" firefox
 emerge --ask sys-apps/dbus
 rc-update add dbus default
 
+# flathub
+emerge --ask --verbose sys-apps/flatpak
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
 # Polkit flathub ja tem
 emerge --ask sys-auth/polkit
 rc-update add polkit default
