@@ -47,10 +47,10 @@ emerge -avuDN @world
 passwd
 
 # colocar no grupo
-useradd -g users -G wheel,portage,audio,video,usb,cdrom -m akil
+useradd -g users -G wheel,portage,audio,video,usb,cdrom -m anjl
 
 # senha do usuário 
-passwd akil
+passwd anjl
 
 ln -sf /usr/share/zoneinfo/Europe/Helsinki /etc/localtime
 
