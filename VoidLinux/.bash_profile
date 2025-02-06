@@ -15,3 +15,4 @@ if [ -z "$WAYLAND_DISPLAY" ] && [ "$(tty)" = "/dev/tty2" ]; then
 fi
 
 
+source ~/.bash_profile
