@@ -77,11 +77,13 @@ cp /boot/vmlinuz /boot/efi/boot/bootx64.efi
 rc-update add dhcpcd default
 rc-service dhcpcd start
 
+========================================
 nano /etc/portage/package.use/sysklogd
+app-admin/sysklogd logrotate
 emerge --ask app-admin/sysklogd 
 rc-update add sysklogd default 
 rc-update add cronie default
-
+========================================
 exit 
 reboot
 
