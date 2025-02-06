@@ -32,11 +32,13 @@ cp -L /etc/resolv.conf etc && arch-chroot .
 # atualizar o sistema
 emerge-webrsync 
 
+===================================================================
 emerge --ask app-portage/cpuid2cpuflags 
 
 cpuid2cpuflags 
 
 echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags 
+=====================================================================
 
 # atualizar o grupo
 emerge -avuDN @world
