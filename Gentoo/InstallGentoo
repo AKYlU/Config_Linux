@@ -103,8 +103,8 @@ emerge --ask gui-wm/wayfire
 emerge --ask x11-terms/kitty
 
 # firefox
+echo "www-client/firefox wayland dbus" >> /etc/portage/package.use/firefox
 emerge --ask www-client/firefox:esr
-GDK_BACKEND="wayland" firefox
 
 # dbus
 emerge --ask sys-apps/dbus
