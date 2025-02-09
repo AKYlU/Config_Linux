@@ -16,7 +16,9 @@ mount /dev/nvme0n1p4 /mnt/gentoo
 mkdir -p /mnt/gentoo/efi
 mount /dev/nvme0n1p1 /mnt/gentoo/efi
 
+==================
 chronyd -q
+==================
 
 # ir para o diretório
 cd /mnt/gentoo
@@ -27,7 +29,9 @@ wget link musl | llvm | openrc
 # extrai o arquivo
 tar xpvf
 
+===========================================
 cp -L /etc/resolv.conf etc && arch-chroot .
+===========================================
 
 # atualizar o sistema
 emerge-webrsync 
