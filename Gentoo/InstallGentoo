@@ -56,7 +56,9 @@ useradd -g users -G wheel,portage,audio,video,usb,cdrom -m anjl
 # senha do usuário 
 passwd anjl
 
+==========================================================
 ln -sf /usr/share/zoneinfo/Europe/Helsinki /etc/localtime
+==========================================================
 
 nano /etc/portage/make.conf
 USE="dist-kernel"
