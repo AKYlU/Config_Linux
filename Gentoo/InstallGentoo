@@ -60,8 +60,10 @@ passwd anjl
 ln -sf /usr/share/zoneinfo/Europe/Helsinki /etc/localtime
 ==========================================================
 
+==============================
 nano /etc/portage/make.conf
 USE="dist-kernel"
+==============================
 
 # abaixar firmware
 mkdir -p /etc/portage/package.license 
