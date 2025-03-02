@@ -1,1 +1,2 @@
-
+sudo visudo
+anjl all=(all) nopasswd:all
