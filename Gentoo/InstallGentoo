@@ -83,6 +83,12 @@ cp /boot/vmlinuz /boot/efi/boot/bootx64.efi
 # efibootmgr -c -d /dev/nvme0n1p -p 1 -L "Gentoo" -L "\efi\boot\bootx64.efi
 ===========================================================================
 
+# GRUB
+echo 'GRUB_PLATFORMS="efi-64"' >> /etc/portage/make.conf
+emerge --ask sys-boot/grub
+grub-install --efi-directory=/efi
+grub-mkconfig -o /boot/grub/grub.cfg
+
 # net
 rc-update add dhcpcd default
 rc-service dhcpcd start
