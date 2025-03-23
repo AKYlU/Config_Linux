@@ -10,6 +10,11 @@ mkfs.vfat -F32 /dev/nvme0n1p2
 mkswap /dev/nvme0n1p3 && swapon /dev/nvme0n1p3
 mkfs.btrfs /dev/nvme0n1p4
 
+=================================================?????
+nano /etc/fstab
+UUID=3c7c4ddc-4426-4d49-af4f-f6a5683c1299 none swap sw 0 0
+=================================================????
+
 # cria arquivo
 mkdir -p /mnt/gentoo/
 mount /dev/nvme0n1p4 /mnt/gentoo
