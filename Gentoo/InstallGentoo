@@ -148,7 +148,6 @@ sudo nano /etc/portage/package.use/custom
 dev-libs/quazip qt6
 sys-libs/zlib minizip
 
-
 echo "dev-java/openjdk-bin ~amd64" >> /etc/portage/package.accept_keywords
 emerge --ask dev-java/openjdk-bin:21
 eselect java-vm list
@@ -163,3 +162,5 @@ emerge -C llvm-runtimes/libunwind
 # atualiza tudo
 emerge --ask --changed-use --deep @world
 
+# vim
+emerge --ask app-editors/vim
