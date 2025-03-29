@@ -155,6 +155,9 @@ eselect java-vm set system <número>
 
 # steam 
 echo "games-util/game-device-udev-rules ~amd64" >> /etc/portage/package.accept_keywords
+etc-update
+echo "sys-libs/ncurses -gpm" >> /etc/portage/package.use/ncurses
+emerge --ask games-util/steam-launcher
 
 # wine
 emerge -C llvm-runtimes/libunwind
