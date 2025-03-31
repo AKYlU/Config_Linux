@@ -1,0 +1,13 @@
+# Ajustar os limites do Esync
+
+# nano /etc/security/limits.conf
+akil hard nofile 1048576
+akil soft nofile 1048576
+
+# nano /etc/pam.d/common-session
+session required pam_limits.so
+
+# nano /etc/sysctl.conf
+fs.file-max = 2097152
+vm.max_map_count = 2147483642
+#sysctl -p
