@@ -10,7 +10,7 @@ lsblk
 cfdisk /dev
 which
 
-#comando
+#comando file
 ncdu
 
 # é para tira o 5s
