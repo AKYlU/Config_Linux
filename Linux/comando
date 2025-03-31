@@ -20,11 +20,10 @@ GRUB_TIMEOUT=0
 # para salva o grub
 sudo update-grub
 
-# é para ir para bio
+# é para ir para bio (systemd)
 systemctl reboot --firmware-setup
 
 sudo visudo
-
 usuario ALL=(ALL) NOPASSWD: ALL
 
 install p7zip-full playerctl steam firefox sway flathub gnome-boxes gamemode alacritty  sudo xbps-install -S ttf-opensans gamescope
