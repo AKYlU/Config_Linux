@@ -1,0 +1,7 @@
+# dependências
+wayland wayland-protocols scdoc meson ninja
+git clone https://git.sr.ht/~kennylevinsen/wlsunset
+cd wlsunset
+meson setup build
+ninja -C build
+# ninja -C build install
