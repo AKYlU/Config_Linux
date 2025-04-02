@@ -1,0 +1,2 @@
+chsh -s $(which fish)
+chsh -s (which fish)
