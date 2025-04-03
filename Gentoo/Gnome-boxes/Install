@@ -20,3 +20,7 @@ emerge -avuDN @world
 echo "app-crypt/p11-kit abi_x86_32" >> /etc/portage/package.use/p11-kit
 emerge -avuDN @world
 emerge --ask gnome-extra/gnome-boxes
+
+# Adicionar seu usuário ao grupo kvm
+rc-service libvirtd start
+rc-update add libvirtd default
