@@ -1,0 +1,13 @@
+# emege app-emulation/spice-protocol
+echo "app-emulation/qemu -spice" >> /etc/portage/package.use/qemu
+emerge -1 app-emulation/qemu
+# remova a flag -spice
+sed -i '/app-emulation\/qemu -spice/d' /etc/portage/package.use/qemu
+emerge -1 app-emulation/qemu
+# Spice sem resolver dependências 
+emerge --nodeps app-emulation/spice
+emerge -avuDN @world
+# atualizar os arquivos
+dispatch-conf
+# atualizar
+emerge -avuDN @world
