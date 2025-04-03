@@ -15,3 +15,8 @@ dispatch-conf
 
 # atualizar
 emerge -avuDN @world
+
+ # Ativar abi_x86_32 para p11-kit
+echo "app-crypt/p11-kit abi_x86_32" >> /etc/portage/package.use/p11-kit
+emerge -avuDN @world
+emerge --ask gnome-extra/gnome-boxes
