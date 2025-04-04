@@ -8,3 +8,7 @@ memtest86 (e)
     Teste a RAM do sistema para erros.
  xhost +SI:localuser:akil
  mount -o remount,rw /dev/nvme0n1 /
+
+USE="pulseaudio -alsa" → Ativa suporte a PulseAudio e remove suporte a ALSA.
+
+USE="wayland -X" → Compila programas com suporte a Wayland e sem dependências do X11.
