@@ -114,9 +114,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     pkgs.alacritty
-    pkgs.steam
-    pkgs.discover
-vim
+    pkgs.kdePackages.sddm
   ];
 
   # Enable the OpenSSH daemon.
