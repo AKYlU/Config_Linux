@@ -12,3 +12,11 @@ memtest86 (e)
 USE="pulseaudio -alsa" → Ativa suporte a PulseAudio e remove suporte a ALSA.
 
 USE="wayland -X" → Compila programas com suporte a Wayland e sem dependências do X11.
+
+🔻 Remover os botões da barra de título (para "ocultá-la"):
+
+gsettings set org.gnome.desktop.wm.preferences button-layout ':'
+
+🔻 Reverter para o padrão (caso queira voltar):
+
+gsettings reset org.gnome.desktop.wm.preferences button-layout
