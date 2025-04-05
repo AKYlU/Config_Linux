@@ -5,52 +5,41 @@
     ./hardware-configuration.nix
   ];
 
-  #### BOOT
-  boot = {
-    loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = true;
-    kernelModules = [ "btusb" ]; # Bluetooth USB
-  };
+  # Bootloader
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelModules = [ "btusb" ];  # Bluetooth USB
 
-  #### HOSTNAME E REDE
-  networking = {
-    hostName = "nixos";
-    networkmanager.enable = true;
-  };
+  # Hostname e rede
+  networking.hostName = "nixos";
+  networking.networkmanager.enable = true;
 
-  #### LOCALE E FUSO HORÁRIO
+  # Locale e fuso horário
   time.timeZone = "America/Recife";
-
-  i18n = {
-    defaultLocale = "pt_BR.UTF-8";
-    extraLocaleSettings = {
-      LC_ADDRESS = "pt_BR.UTF-8";
-      LC_IDENTIFICATION = "pt_BR.UTF-8";
-      LC_MEASUREMENT = "pt_BR.UTF-8";
-      LC_MONETARY = "pt_BR.UTF-8";
-      LC_NAME = "pt_BR.UTF-8";
-      LC_NUMERIC = "pt_BR.UTF-8";
-      LC_PAPER = "pt_BR.UTF-8";
-      LC_TELEPHONE = "pt_BR.UTF-8";
-      LC_TIME = "pt_BR.UTF-8";
-    };
+  i18n.defaultLocale = "pt_BR.UTF-8";
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "pt_BR.UTF-8";
+    LC_IDENTIFICATION = "pt_BR.UTF-8";
+    LC_MEASUREMENT = "pt_BR.UTF-8";
+    LC_MONETARY = "pt_BR.UTF-8";
+    LC_NAME = "pt_BR.UTF-8";
+    LC_NUMERIC = "pt_BR.UTF-8";
+    LC_PAPER = "pt_BR.UTF-8";
+    LC_TELEPHONE = "pt_BR.UTF-8";
+    LC_TIME = "pt_BR.UTF-8";
   };
 
-  #### INTERFACE GRÁFICA: X11 + I3WM + DISPLAY MANAGER
-  services.xserver = {
-    enable = true;
-    xkb.layout = "us";
-    windowManager.i3.enable = true;
+  # X11 + i3wm
+  services.xserver.enable = true;
+  services.xserver.windowManager.i3.enable = true;
+  services.xserver.xkb.layout = "us";
 
-    displayManager.sddm = {
-      enable = true;
-      wayland.enable = false;
-    };
-
-    displayManager.autoLogin = {
-      enable = true;
-      user = "anjl";
-    };
+  # Display Manager (SDDM com X11)
+  services.displayManager = {
+    sddm.enable = true;
+    sddm.wayland.enable = false;
+    autoLogin.enable = true;
+    autoLogin.user = "anjl";
   };
 
   environment.sessionVariables = {
@@ -58,18 +47,17 @@
     QT_QPA_PLATFORM = "xcb";
   };
 
-  #### PORTAIS E FLATPAK
+  # Portais (Flatpak etc)
   services.flatpak.enable = true;
-
   xdg.portal = {
     enable = true;
     config.common.default = "*";
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
-  #### ÁUDIO: PIPEWIRE
+  # Som (PipeWire)
   hardware.pulseaudio.enable = false;
-
+  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     pulse.enable = true;
@@ -79,34 +67,34 @@
     };
   };
 
-  security.rtkit.enable = true;
-
-  #### BLUETOOTH
+  # Bluetooth
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
   hardware.enableAllFirmware = true;
 
-  #### IMPRESSÃO
+  # Impressão
   services.printing.enable = true;
 
-  #### USUÁRIO
+  # Usuário
   users.users.anjl = {
     isNormalUser = true;
     description = "anjl";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      kate
+      kdePackages.kate
     ];
   };
 
-  #### PROGRAMAS DO SISTEMA
+  # Programas do sistema
   programs.firefox.enable = true;
 
   environment.systemPackages = with pkgs; [
     alacritty
   ];
 
-  #### OUTRAS CONFIGS
+  # Permitir pacotes não livres
   nixpkgs.config.allowUnfree = true;
+
+  # Versão do estado do sistema
   system.stateVersion = "24.11";
 }
