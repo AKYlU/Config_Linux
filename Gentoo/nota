@@ -20,3 +20,4 @@ gsettings set org.gnome.desktop.wm.preferences button-layout ':'
 🔻 Reverter para o padrão (caso queira voltar):
 
 gsettings reset org.gnome.desktop.wm.preferences button-layout
+
