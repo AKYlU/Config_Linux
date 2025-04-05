@@ -41,11 +41,15 @@
     enable = true;
     xkb.layout = "us";
     windowManager.i3.enable = true;
-    displayManager = {
-      sddm.enable = true;
-      sddm.wayland.enable = false;
-      autoLogin.enable = true;
-      autoLogin.user = "anjl";
+
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = false;
+    };
+
+    displayManager.autoLogin = {
+      enable = true;
+      user = "anjl";
     };
   };
 
@@ -56,6 +60,7 @@
 
   #### PORTAIS E FLATPAK
   services.flatpak.enable = true;
+
   xdg.portal = {
     enable = true;
     config.common.default = "*";
@@ -90,7 +95,7 @@
     description = "anjl";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      kdePackages.kate
+      kate
     ];
   };
 
