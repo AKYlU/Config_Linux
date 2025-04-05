@@ -1,1 +1,2 @@
 curl -o configuration.nix https://raw.githubusercontent.com/AnJLFifi/Install-Linux/main/NixOS/configuration.nix
+nixos-rebuild switch --upgrade
