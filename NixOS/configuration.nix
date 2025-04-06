@@ -115,6 +115,7 @@
   environment.systemPackages = with pkgs; [
     pkgs.alacritty
     pkgs.kdePackages.sddm
+    firefox
   ];
 
   # Enable the OpenSSH daemon.
