@@ -1,4 +1,4 @@
-# emege app-emulation/spice-protocol
+# emerge app-emulation/spice-protocol
 echo "app-emulation/qemu -spice" >> /etc/portage/package.use/qemu
 emerge -1 app-emulation/qemu
 
