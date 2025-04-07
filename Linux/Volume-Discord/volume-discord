@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Volume desejado
+TARGET_VOLUME="150%"
+
+while true; do
+    # Lista todos os sink inputs do Firefox
+    pactl list sink-inputs | awk -v RS='' '
+        /application.name = "Firefox"/ && /media.name = "\(3\) Discord/ {
+            match($0, /Sink Input #([0-9]+)/, m)
+            if (m[1] != "") {
+                print m[1]
+            }
+        }
+    ' | while read -r sink_id; do
+        # Aplica volume 150%
+        pactl set-sink-input-volume "$sink_id" "$TARGET_VOLUME"
+    done
+
+    # Espera 3 segundos antes de checar novamente
+    sleep 3
+done
+
