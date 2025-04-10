@@ -1,1 +1,96 @@
+{ config, pkgs, ... }:
+
+{
+  imports = [
+    ./hardware-configuration.nix
+  ];
+
+  nixpkgs.config.allowUnfree = true;
+
+  networking.hostName = "wayfire-nixos";
+  time.timeZone = "America/Sao_Paulo";
+  i18n.defaultLocale = "en_US.UTF-8";
+  console.keyMap = "us";
+
+  users.users.akyil = {
+    isNormalUser = true;
+    description = "Usuário Akyil";
+    extraGroups = [ "wheel" "video" "audio" "input" "libvirtd" ];
+    shell = pkgs.fish;
+  };
+
+  programs.fish.enable = true;
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  services.xserver.enable = true;
+
+  services.displayManager.sddm.enable = true;
+  services.displayManager.defaultSession = "wayfire";
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = "akyil";
+  };
+
+  services.xserver.desktopManager.session = [
+    {
+      name = "wayfire";
+      start = ''
+        exec ${pkgs.wayfire}/bin/wayfire
+      '';
+    }
+  ];
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = false;
+  };
+
+  xdg.portal = {
+    enable = true;
+    config.common.default = "*";
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-wlr
+    ];
+  };
+
+  virtualisation.libvirtd.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    firefox
+    foot
+    blender-hip
+    fish
+    lutris
+    git
+    curl
+    wget
+    fastfetch
+    wayfire
+    wf-config
+    xwayland
+  ];
+
+  networking.networkmanager.enable = true;
+
+  security.sudo.enable = true;
+  security.sudo.wheelNeedsPassword = false;
+
+  hardware.graphics.enable = true;
+  services.xserver.videoDrivers = [ "amdgpu" ];
+
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    MOZ_ENABLE_WAYLAND = "1";
+    XDG_SESSION_TYPE = "wayland";
+    GDK_BACKEND = "wayland,x11";
+  };
+
+  system.stateVersion = "23.11";
+}
 
