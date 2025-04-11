@@ -116,6 +116,8 @@
     pkgs.alacritty
     pkgs.kdePackages.sddm
     firefox
+    wineWowPackages.stable
+    winetricks
   ];
 
   # Enable the OpenSSH daemon.
