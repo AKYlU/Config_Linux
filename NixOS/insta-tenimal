@@ -1,2 +1,7 @@
 curl -o configuration.nix https://raw.githubusercontent.com/AnJLFifi/Install-Linux/main/NixOS/configuration.nix
 nixos-rebuild switch --upgrade
+
+# wine
+rm -rf ~/.wine
+WINEARCH=win64 WINEPREFIX=~/.wine wineboot
+winetricks -q vcrun2019 dotnet48 corefonts
