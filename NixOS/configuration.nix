@@ -118,6 +118,7 @@
     firefox
     wineWowPackages.stable
     winetricks
+    anydesk
   ];
 
   # Enable the OpenSSH daemon.
