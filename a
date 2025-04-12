@@ -8,3 +8,19 @@ update-grub
 exit
 sudo umount -R /mnt
 reboot
+
+sudo mount /dev/sdXn /mnt  # Substitua pelo seu root (ex: /dev/sda2)
+sudo manjaro-chroot /mnt
+
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=manjaro
+update-grub
+
+mhwd-kernel -li  # lista kernels
+mhwd-kernel -i linux6X  # instala novo kernel, ex: linux65
+
+pacman -Syu
+pacman -Qk  # verifica integridade
+
+exit
+sudo umount -R /mnt
+reboot
