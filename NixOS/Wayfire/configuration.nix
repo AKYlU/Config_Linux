@@ -24,9 +24,10 @@
     shell = pkgs.fish;
   };
 
+  services.flatpak.enable = true;
+
   programs.fish.enable = true;
 
-  services.xserver.enable = true;
   programs.xwayland.enable = true;
 
   hardware.pulseaudio.enable = false;
@@ -35,7 +36,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    jack.enable = false;
+    jack.enable = true;
   };
 
   xdg.portal = {
@@ -49,16 +50,16 @@
 
   virtualisation.libvirtd.enable = true;
 
+  services.spice-vdagentd.enable = true;
+
+  programs.dconf.enable = true;
 
   networking.firewall.allowedTCPPorts = [ 6969 ];
   # Se você também precisar de UDP (geralmente não é o caso para o Spigot):
   # networking.firewall.allowedUDPPorts = [ 6969 ];
 
-
-
-  environment.systemPackages = with pkgs; [
-    foot
-    blender-hip
+  environment.systemPackages = with pkgs; [ 
+    blender-hip reaper unityhub android-studio #protividade
     fish
     lutris
     git
@@ -67,26 +68,64 @@
     fastfetch
     wayfire
     xwayland
-    virt-manager
+    virt-manager spice-gtk spice-protocol #vm
     vivaldi
     btop
-    unityhub
     parsec-bin
     vulkan-tools
     vulkan-loader
-    unzip
-    file
+    unzip unrar libsForQt5.ark #istrair
     wlsunset
     rustdesk
     lunarvim
-    prismlauncher
-    OVMF
-    jdk21
+    prismlauncher jdk21 #minecraft
     steam
-    pulseaudio
-    lxappearance
-    rox-filer
+    pulseaudio playerctl #comtrole de som
+    libsForQt5.dolphin
+    gnome-themes-extra libsForQt5.breeze-icons libsForQt5.qt5ct # tema
+    libsForQt5.konsole
+    mononoki dejavu_fonts fira-code jetbrains-mono hack-font dejavu_fonts liberation_ttf_v1 noto-fonts noto-fonts-emoji-blob-bin noto-fonts-cjk-sans #fots
+    gamescope
 ];
+
+hardware.graphics = {
+  enable = true;
+  enable32Bit = true;
+  extraPackages = with pkgs; [
+    mesa.drivers
+    libva
+    libvdpau
+    vaapiVdpau
+  ];
+  extraPackages32 = with pkgs.pkgsi686Linux; [
+    mesa.drivers
+    libva
+    libvdpau
+    vaapiVdpau
+  ];
+};
+
+  programs.steam = {
+    enable = true;
+    package = pkgs.steam.override {
+      extraPkgs = pkgs: with pkgs; [
+        vulkan-loader
+        vulkan-validation-layers
+        libva
+        libvdpau
+      ];
+    };
+  };
+
+  fonts = {
+    enableDefaultPackages = true;
+    fontconfig = {
+      enable = true;
+      antialias = true;
+      hinting.enable = true;
+      subpixel.rgba = "rgb";
+    };
+   };
 
   programs.java = {
     enable = true;
@@ -96,22 +135,14 @@
   security.sudo.enable = true;
   security.sudo.wheelNeedsPassword = false;
 
-  hardware.graphics.enable = true;
-
+#  hardware.graphics.enable = true;
+ 
   environment.sessionVariables = {
+    QT_QPA_PLATFORM = "wayland";
+    QT_QPA_PLATFORMTHEME = "qt5ct";
+    QT_STYLE_OVERRIDE = "Fusion"; 
     GTK_THEME = "Adwaita:dark";
-    XDG_DATA_DIRS = "/run/current-system/sw/share";
-    QT_STYLE_OVERRIDE = "Adwaita-Dark";
-  };
-
-  # Cria links simbólicos para os arquivos de firmware EFI usando o pacote OVMF
-  system.activationScripts.ovmf = {
-    text = ''
-      mkdir -p /usr/share/OVMF
-      ln -sf ${pkgs.OVMF}/share/OVMF/OVMF_CODE.fd /usr/share/OVMF/OVMF_CODE.fd
-      ln -sf ${pkgs.OVMF}/share/OVMF/OVMF_VARS.fd /usr/share/OVMF/OVMF_VARS.fd
-    '';
-  };
+};
 
   system.stateVersion = "23.11";
-}
+ } 
