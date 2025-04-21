@@ -15,7 +15,18 @@
   i18n.defaultLocale = "en_US.UTF-8";                    # Define o locale padrão do sistema
   console.keyMap = "br-abnt2";                                 # Define o layout de teclado do console
 
-  networking.networkmanager.enable = true;               # Habilita o NetworkManager para gerenciar conexão de rede
+ services.flatpak.enable = true;
+
+  networking.networkmanager.enable = true;  # Ativa o NetworkManager
+  networking.networkmanager.ensureProfiles = {
+    "VIVOFIBRA-CF00" = {
+      connection.autoconnect = true;
+      connection.id = "VIVOFIBRA-CF00";
+      connection.type = "802-3-ethernet";  # ou "802-11-wireless" se for Wi-Fi
+      ipv4.method = "auto";
+      ipv6.method = "auto";
+    };
+  };
 
   users.users.akyila = {                                  # Configuração do usuário 'akyil'
     isNormalUser = true;                                 # Usuário não-root
