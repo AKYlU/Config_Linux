@@ -15,6 +15,9 @@
   i18n.defaultLocale = "en_US.UTF-8";                    # Define o locale padrão do sistema
   console.keyMap = "br-abnt2";                           # Define o layout de teclado do console
 
+    hardware.bluetooth.enable = true;
+  services.blueman.enable = true; # Para usar a interface gráfica Blueman
+
   services.flatpak.enable = true;
 
   networking.networkmanager.enable = true;               # Habilita o NetworkManager para gerenciar conexão de rede
