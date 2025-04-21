@@ -13,22 +13,13 @@
   networking.hostName = "wayfire-nixos";                 # Define o nome de host da máquina
   time.timeZone = "America/Sao_Paulo";                   # Define o fuso horário do sistema
   i18n.defaultLocale = "en_US.UTF-8";                    # Define o locale padrão do sistema
-  console.keyMap = "br-abnt2";                                 # Define o layout de teclado do console
+  console.keyMap = "br-abnt2";                           # Define o layout de teclado do console
 
- services.flatpak.enable = true;
+  services.flatpak.enable = true;
 
-  networking.networkmanager.enable = true;  # Ativa o NetworkManager
-  networking.networkmanager.ensureProfiles = {
-    "VIVOFIBRA-CF00" = {
-      connection.autoconnect = true;
-      connection.id = "VIVOFIBRA-CF00";
-      connection.type = "802-3-ethernet";  # ou "802-11-wireless" se for Wi-Fi
-      ipv4.method = "auto";
-      ipv6.method = "auto";
-    };
-  };
+  networking.networkmanager.enable = true;               # Habilita o NetworkManager para gerenciar conexão de rede
 
-  users.users.akyila = {                                  # Configuração do usuário 'akyil'
+  users.users.akyila = {                                 # Configuração do usuário 'akyil'
     isNormalUser = true;                                 # Usuário não-root
     description = "Usuário Akyil";                       # Descrição do usuário
     extraGroups = [ "wheel" "video" "audio" "input" "libvirtd" ];  # Grupos adicionais
