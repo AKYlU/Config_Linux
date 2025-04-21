@@ -98,6 +98,8 @@
     slurp
   #  ffmpeg
     bemenu
+    wayfirePlugins.wf-shell
+    wcm
 
 
     libsForQt5.dolphin  # Dolphin file manager (Qt5)
