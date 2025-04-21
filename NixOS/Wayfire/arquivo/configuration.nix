@@ -78,6 +78,7 @@
    # lunarvim            # Editor de texto (configurado como IDE)
     firefox-esr
     discord
+    gnome-software
 
     wayfire             # Compositor Wayland (Wayfire)
     xwayland            # Compatibilidade X11 no Wayland
