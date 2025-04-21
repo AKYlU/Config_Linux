@@ -81,6 +81,7 @@
     firefox-esr
     discord
     gnome-software
+    networkmanagerapplet
 
     wayfire             # Compositor Wayland (Wayfire)
     xwayland            # Compatibilidade X11 no Wayland
