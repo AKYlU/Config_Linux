@@ -129,7 +129,15 @@
     
    # xdg-desktop-portal-gtk           # Portal GTK
    # xdg-desktop-portal-wlr           # Portal WLR para Wayland
+
+  fuse3  # provê o binário fusermount3
+  lxde.lxsession
+  gnome-themes-extra  # útil para temas GTK
+  cantarell-fonts     # fontes usadas por GNOME/GTK
+  fontconfig
 ];
+
+programs.fuse.userAllowOther = true; # Permite usuários usarem FUSE
 
   hardware.graphics = {              # Configurações de GPU
     enable = true;                   # Habilita drivers gráficos
