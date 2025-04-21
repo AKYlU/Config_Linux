@@ -99,7 +99,7 @@
   #  ffmpeg
     bemenu
     wayfirePlugins.wf-shell
-    wcm
+    wayfirePlugins.wcm
 
 
     libsForQt5.dolphin  # Dolphin file manager (Qt5)
