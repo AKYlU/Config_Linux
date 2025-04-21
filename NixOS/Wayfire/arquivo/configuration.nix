@@ -125,6 +125,7 @@
  
     libsForQt5.qt5ct                  # tema
     libsForQt5.breeze-icons 
+    papirus-icon-theme
     
    # xdg-desktop-portal-gtk           # Portal GTK
    # xdg-desktop-portal-wlr           # Portal WLR para Wayland
