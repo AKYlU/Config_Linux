@@ -13,11 +13,11 @@
   networking.hostName = "wayfire-nixos";                 # Define o nome de host da máquina
   time.timeZone = "America/Sao_Paulo";                   # Define o fuso horário do sistema
   i18n.defaultLocale = "en_US.UTF-8";                    # Define o locale padrão do sistema
-  console.keyMap = "us";                                 # Define o layout de teclado do console
+  console.keyMap = "br-abnt2";                                 # Define o layout de teclado do console
 
   networking.networkmanager.enable = true;               # Habilita o NetworkManager para gerenciar conexão de rede
 
-  users.users.akyil = {                                  # Configuração do usuário 'akyil'
+  users.users.akyila = {                                  # Configuração do usuário 'akyil'
     isNormalUser = true;                                 # Usuário não-root
     description = "Usuário Akyil";                       # Descrição do usuário
     extraGroups = [ "wheel" "video" "audio" "input" "libvirtd" ];  # Grupos adicionais
@@ -46,44 +46,45 @@
     ];
   };
 
-  virtualisation.libvirtd.enable = true;                 # Habilita o serviço libvirtd para VMs
+ # virtualisation.libvirtd.enable = true;                 # Habilita o serviço libvirtd para VMs
 
-  systemd.services."start-libvirt-default-network" = {   # Serviço systemd para iniciar a rede "default" do libvirt no boot
-    description = "Start default libvirt network on boot"; 
-
-    after = [ "libvirtd.service" ];                      # Só inicia depois que o serviço libvirtd estiver rodando
-    
-    wantedBy = [ "multi-user.target" ];                  # Garante que rode no boot
-    
-    serviceConfig = {
-      Type = "oneshot";                                  # Executa uma vez e termina
-      ExecStart = "/run/current-system/sw/bin/virsh net-start default"; # Comando para iniciar a rede
-      RemainAfterExit = true;                            # Marca como "ativo" mesmo após terminar
-    };
-  };
+ # systemd.services."start-libvirt-default-network" = {   # Serviço systemd para iniciar a rede "default" do libvirt no boot
+ #   description = "Start default libvirt network on boot"; 
+ #
+ #   after = [ "libvirtd.service" ];                      # Só inicia depois que o serviço libvirtd estiver rodando
+ #   
+ #   wantedBy = [ "multi-user.target" ];                  # Garante que rode no boot
+ #   
+ #   serviceConfig = {
+ #     Type = "oneshot";                                  # Executa uma vez e termina
+ #     ExecStart = "/run/current-system/sw/bin/virsh net-start default"; # Comando para iniciar a rede
+ #     RemainAfterExit = true;                            # Marca como "ativo" mesmo após terminar
+ #   };
+ # };
 
   # services.spice-vdagentd.enable = true;               # Habilita o agente SPICE para VMs
 
-  networking.firewall.allowedTCPPorts = [ 6969 ];        # Abre porta TCP 6969 no firewall
+  # networking.firewall.allowedTCPPorts = [ 6969 ];        # Abre porta TCP 6969 no firewall
   # Se UDP for necessário, descomente a linha abaixo
   # networking.firewall.allowedUDPPorts = [ 6969 ];      # Abre porta UDP 6969
 
   environment.systemPackages = with pkgs; [              # Pacotes instalados globalmente
-    blender-hip         # Programa de modelagem 3D especializado
-    reaper              # DAW para edição de áudio
-    unityhub            # Hub do Unity Engine
-    android-studio      # IDE Android
-    virt-manager        # GUI para gerenciamento de VMs
-    vivaldi             # Navegador baseado em Chromium
-    lunarvim            # Editor de texto (configurado como IDE)
+   # blender-hip         # Programa de modelagem 3D especializado
+   # reaper              # DAW para edição de áudio
+   # unityhub            # Hub do Unity Engine
+   # android-studio      # IDE Android
+   # virt-manager        # GUI para gerenciamento de VMs
+   # vivaldi             # Navegador baseado em Chromium
+   # lunarvim            # Editor de texto (configurado como IDE)
     firefox-esr
+    discord
 
     wayfire             # Compositor Wayland (Wayfire)
     xwayland            # Compatibilidade X11 no Wayland
     wlsunset            # Ajuste de temperatura de cor no Wayland
     grim                # tira foto
     slurp
-    ffmpeg
+  #  ffmpeg
     bemenu
 
 
@@ -94,8 +95,8 @@
 
     steam               # Plataforma de jogos Steam
     lutris              # Gerenciador de jogos
-    prismlauncher       # Launcher para jogos Prismatik
-    jdk21               # Java Development Kit 21
+   # prismlauncher       # Launcher para jogos Prismatik
+   # jdk21               # Java Development Kit 21
 
     pulseaudio          # Cliente PulseAudio (requerido por alguns apps)
     playerctl           # Controle de player via CLI
@@ -135,10 +136,10 @@
     };
   };
 
-  programs.java = {                  # Configuração do Java
-    enable = true;
-    package = pkgs.jdk21;            # Define pacote JDK21
-  };
+ # programs.java = {                  # Configuração do Java
+ #   enable = true;
+ #   package = pkgs.jdk21;            # Define pacote JDK21
+ # };
 
   environment.sessionVariables = {   # Variáveis de ambiente para sessões
     QT_QPA_PLATFORM = "wayland";     # Define plataforma Qt para Wayland
