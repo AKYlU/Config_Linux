@@ -2,45 +2,47 @@
 
 {
   imports = [
-    ./hardware-configuration.nix    # Importa as configurações de hardware geradas automaticamente
+    ./hardware-configuration.nix
   ];
 
-  boot.loader.systemd-boot.enable = true;                # Habilita o carregador de sistema systemd-boot
-  boot.loader.efi.canTouchEfiVariables = true;           # Permite ao NixOS escrever variáveis EFI
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
-  nixpkgs.config.allowUnfree = true;                     # Permite pacotes com licenças não-livres
+  nixpkgs.config.allowUnfree = true;
 
-  networking.hostName = "wayfire-nixos";                 # Define o nome de host da máquina
-  time.timeZone = "America/Sao_Paulo";                   # Define o fuso horário do sistema
-  i18n.defaultLocale = "en_US.UTF-8";                    # Define o locale padrão do sistema
-  console.keyMap = "br-abnt2";                           # Define o layout de teclado do console
+  networking.hostName = "wayfire-nixos";
+  time.timeZone = "America/Sao_Paulo";
+  i18n.defaultLocale = "en_US.UTF-8";
+  console.keyMap = "br-abnt2";
 
   # Bluetooth
-  hardware.bluetooth.enable = true;                      # Ativa suporte Bluetooth via kernel/bluez
-  services.bluetooth.enable = true;                      # Ativa o serviço do daemon Bluetooth (bluetoothd)
-  services.blueman.enable = true;                        # Interface gráfica Blueman para gerenciamento via GUI
-  services.bluetooth.settings = {                        # Configuração do daemon Bluetooth
+  hardware.bluetooth.enable = true;
+  services.bluetooth.enable = true;
+  services.blueman.enable = true;
+  services.bluetooth.settings = {
     General = {
-      AutoEnable = true;                                 # Ativa adaptador automaticamente no boot
+      AutoEnable = true;
     };
   };
 
-  services.flatpak.enable = true;                        # Habilita suporte ao Flatpak
+  # Flatpak e integração com gnome-software
+  services.flatpak.enable = true;
 
-  networking.networkmanager.enable = true;               # Gerenciador de rede padrão
+  # NetworkManager
+  networking.networkmanager.enable = true;
 
   users.users.akyila = {
     isNormalUser = true;
     description = "Usuário Akyil";
-    extraGroups = [ "wheel" "video" "audio" "input" "libvirtd" ]; # Grupos adicionais
+    extraGroups = [ "wheel" "video" "audio" "input" "libvirtd" ];
     shell = pkgs.fish;
   };
 
-  programs.fish.enable = true;                           # Ativa o shell Fish para o sistema
+  programs.fish.enable = true;
+  programs.xwayland.enable = true;
 
-  programs.xwayland.enable = true;                       # Ativa compatibilidade X11 no Wayland
-
-  hardware.pulseaudio.enable = false;                    # Desativa PulseAudio (substituído por PipeWire)
+  # PipeWire no lugar do PulseAudio
+  hardware.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -49,9 +51,10 @@
     jack.enable = true;
   };
 
+  # XDG Portals para integração com Flatpak, GTK e Wayland
   xdg.portal = {
     enable = true;
-    config.common.default = "*";                         # Portal padrão
+    config.common.default = "*";
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal-wlr
@@ -61,7 +64,13 @@
   environment.systemPackages = with pkgs; [
     firefox-esr
     discord
-    gnome-software
+    gnome-software                            # Centro de aplicativos
+    gnome.gnome-software                      # redundância (alguns casos precisa)
+    gnome.gnome-control-center                # necessário para configurar fontes Flatpak
+    gnome.gnome-settings-daemon               # integração de configurações GNOME
+    gnome.gnome-keyring                       # chaveiro para autenticação Flatpak
+    gnome.glib-networking                     # necessário para plugins funcionarem
+    gnome.gnome-software-plugin-flatpak       # plugin para suporte ao Flatpak no gnome-software
     networkmanagerapplet
 
     wayfire
@@ -81,7 +90,7 @@
     steam
     lutris
 
-    pulseaudio               # Algumas apps ainda exigem cliente PulseAudio
+    pulseaudio
     playerctl
 
     libsForQt5.konsole
@@ -100,7 +109,7 @@
     fontconfig
   ];
 
-  programs.fuse.userAllowOther = true;                   # Permite FUSE para usuários normais
+  programs.fuse.userAllowOther = true;
 
   hardware.graphics = {
     enable = true;
@@ -124,5 +133,5 @@
     GTK_THEME = "Adwaita:dark";
   };
 
-  system.stateVersion = "23.11";                         # Fixa o estado do sistema na versão 23.11
+  system.stateVersion = "23.11";
 }
