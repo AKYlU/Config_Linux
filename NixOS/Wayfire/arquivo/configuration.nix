@@ -55,7 +55,7 @@
 
     blueman         # Ferramenta gráfica para gerenciar dispositivos Bluetooth
     bluez           # Gerenciador de Bluetooth (necessário)
-    pulseaudio-bluetooth # Caso você queira suportar áudio via Bluetooth
+    pavucontrol
 
     firefox-esr
     discord
@@ -104,6 +104,11 @@
     fontconfig
   ];
 
+ # Habilitar o serviço Bluetooth
+systemd.services.bluetooth = {
+  enable = true;
+};
+ 
   programs.fuse.userAllowOther = true;
 
   hardware.graphics = {
