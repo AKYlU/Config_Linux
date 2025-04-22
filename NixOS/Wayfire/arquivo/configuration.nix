@@ -21,6 +21,9 @@
   # NetworkManager
   networking.networkmanager.enable = true;
 
+ # Habilitar Bluetooth no NixOS
+ networking.bluetooth.enable = true;
+
   users.users.akyila = {
     isNormalUser = true;
     description = "Usuário Akyil";
@@ -103,11 +106,6 @@
     cantarell-fonts
     fontconfig
   ];
-
-# Habilitar o serviço Bluetooth
-systemd.services.bluetooth = {
-  enable = true;
-};
 
   programs.fuse.userAllowOther = true;
 
