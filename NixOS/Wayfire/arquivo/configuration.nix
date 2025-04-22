@@ -15,8 +15,18 @@
   i18n.defaultLocale = "en_US.UTF-8";                    # Define o locale padrão do sistema
   console.keyMap = "br-abnt2";                           # Define o layout de teclado do console
 
-    hardware.bluetooth.enable = true;
-  services.blueman.enable = true; # Para usar a interface gráfica Blueman
+  # Habilita o suporte a Bluetooth no sistema
+  hardware.bluetooth.enable = true;
+
+  # Habilita o serviço blueman, necessário para gerenciar Bluetooth via interface gráfica no Wayland
+  services.blueman.enable = true;
+
+  # Configuração extra do Blueman
+  services.blueman.extraConfig = {
+    "General" = {
+      "AutoEnable" = "true"; # Ativa o adaptador Bluetooth automaticamente ao iniciar
+    };
+  };
 
   services.flatpak.enable = true;
 
