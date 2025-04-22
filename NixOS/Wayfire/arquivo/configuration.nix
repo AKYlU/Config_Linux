@@ -21,9 +21,6 @@
   # NetworkManager
   networking.networkmanager.enable = true;
 
-  # Habilitar Bluetooth no NixOS
-  networking.bluetooth.enable = true;
-
   users.users.akyila = {
     isNormalUser = true;
     description = "Usuário Akyil";
