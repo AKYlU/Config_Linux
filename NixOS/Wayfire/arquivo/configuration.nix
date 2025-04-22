@@ -15,15 +15,9 @@
   i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = "br-abnt2";
 
-  # Bluetooth
-  hardware.bluetooth.enable = true;
-  services.bluetooth.enable = true;
-  services.blueman.enable = true;
-  services.bluetooth.settings = {
-    General = {
-      AutoEnable = true;
-    };
-  };
+  hardware.bluetooth.enable = true;       # Ativa suporte a Bluetooth no kernel
+  services.bluetooth.enable = true;       # Inicia o serviço Bluetooth
+  services.blueman.enable = true;         # Interface gráfica para Bluetooth (GTK)
 
   # Flatpak e integração com gnome-software
   services.flatpak.enable = true;
