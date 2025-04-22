@@ -64,7 +64,6 @@
     gnome.gnome-control-center                # necessário para configurar fontes Flatpak
     gnome.gnome-settings-daemon               # integração de configurações GNOME
     gnome.gnome-keyring                       # chaveiro para autenticação Flatpak
-    gnome.glib-networking                     # necessário para plugins funcionarem
     gnome.gnome-software-plugin-flatpak       # plugin para suporte ao Flatpak no gnome-software
     networkmanagerapplet
 
