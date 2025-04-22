@@ -15,15 +15,14 @@
   i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = "br-abnt2";
 
-  hardware.bluetooth.enable = true;       # Ativa suporte a Bluetooth no kernel
-  services.bluetooth.enable = true;       # Inicia o serviço Bluetooth
-  services.blueman.enable = true;         # Interface gráfica para Bluetooth (GTK)
-
   # Flatpak e integração com gnome-software
   services.flatpak.enable = true;
 
   # NetworkManager
   networking.networkmanager.enable = true;
+
+  # Habilitar Bluetooth no NixOS
+  networking.bluetooth.enable = true;
 
   users.users.akyila = {
     isNormalUser = true;
@@ -56,6 +55,11 @@
   };
 
   environment.systemPackages = with pkgs; [
+
+    blueman         # Ferramenta gráfica para gerenciar dispositivos Bluetooth
+    bluez           # Gerenciador de Bluetooth (necessário)
+    pulseaudio-bluetooth # Caso você queira suportar áudio via Bluetooth
+
     firefox-esr
     discord
     gnome-software                            # Centro de aplicativos
@@ -102,6 +106,11 @@
     cantarell-fonts
     fontconfig
   ];
+
+# Habilitar o serviço Bluetooth
+systemd.services.bluetooth = {
+  enable = true;
+};
 
   programs.fuse.userAllowOther = true;
 
