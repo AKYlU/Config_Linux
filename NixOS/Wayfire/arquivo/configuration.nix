@@ -15,16 +15,20 @@
   i18n.defaultLocale = "en_US.UTF-8";                    # Define o locale padrão do sistema
   console.keyMap = "br-abnt2";                           # Define o layout de teclado do console
 
-  # Habilita o suporte a Bluetooth no sistema
+  # Habilita suporte ao Bluetooth via kernel e bluez
   hardware.bluetooth.enable = true;
 
-  # Habilita o serviço blueman, necessário para gerenciar Bluetooth via interface gráfica no Wayland
+  # Garante que o serviço Bluetooth seja ativado
+  services.bluetooth.enable = true;
+
+  # Habilita a interface gráfica blueman, compatível com Wayland
   services.blueman.enable = true;
 
-  # Configuração extra do Blueman
-  services.blueman.extraConfig = {
-    "General" = {
-      "AutoEnable" = "true"; # Ativa o adaptador Bluetooth automaticamente ao iniciar
+  # Ativa o adaptador Bluetooth automaticamente ao iniciar
+  # Isso é feito no daemon do bluetooth, não no blueman
+  services.bluetooth.settings = {
+    General = {
+      AutoEnable = true; # Sem aspas, pois é um valor booleano
     };
   };
 
