@@ -56,6 +56,10 @@
     blueman         # Ferramenta gráfica para gerenciar dispositivos Bluetooth
     bluez           # Gerenciador de Bluetooth (necessário)
     pavucontrol
+    gnome-bluetooth
+    blueman
+    kdePackages.bluedevil
+    
 
     firefox-esr
     discord
