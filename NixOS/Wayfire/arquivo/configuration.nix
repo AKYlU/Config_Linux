@@ -28,6 +28,10 @@
     shell = pkgs.fish;
   };
 
+   # Enable Bluetooth
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true; # Interface gráfica opcional
+
   programs.fish.enable = true;
   programs.xwayland.enable = true;
 
