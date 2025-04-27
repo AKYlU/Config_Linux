@@ -3,6 +3,7 @@ nixos-rebuild switch --upgrade
 
 # wine
 rm -rf ~/.wine
+winetricks comctl32
 WINEARCH=win64 WINEPREFIX=~/.wine wineboot
 winetricks -q vcrun2019 dotnet48 corefonts
 https://bitmates.itch.io/mmo
