@@ -94,9 +94,9 @@
   boot.kernelModules = [ "btusb" ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.anjl = {
+  users.users.akyil = {
     isNormalUser = true;
-    description = "anjl";
+    description = "akyil";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       kdePackages.kate
