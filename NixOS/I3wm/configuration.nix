@@ -119,6 +119,7 @@
     wineWowPackages.stable
     winetricks
     anydesk
+    rustdesk
   ];
 
   # Enable the OpenSSH daemon.
