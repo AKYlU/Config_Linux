@@ -74,6 +74,7 @@
 
     foot
     swww
+    noto-fonts-cjk-sans # Fontes Noto CJK sans
   ];
 
   # Bluetooth
