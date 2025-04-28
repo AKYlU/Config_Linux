@@ -75,6 +75,7 @@
     foot
     swww
     noto-fonts-cjk-sans # Fontes Noto CJK sans
+    libsForQt5.qt5ct
   ];
 
   # Bluetooth
@@ -104,6 +105,7 @@
     QT_QPA_PLATFORM = "wayland";
     QT_QPA_PLATFORMTHEME = "qt5ct";
     GTK_THEME = "Adwaita:dark";
+    QT_STYLE_OVERRIDE = "Fusion";    # Força estilo Fusion no Qt
   };
 
   system.stateVersion = "23.11";
