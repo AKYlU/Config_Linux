@@ -15,6 +15,8 @@
   i18n.defaultLocale = "en_US.UTF-8";                    # Define o locale padrão do sistema
   console.keyMap = "us";                                 # Define o layout de teclado do console
 
+  services.flatpak.enable = true;
+
   networking.networkmanager.enable = true;               # Habilita o NetworkManager para gerenciar conexão de rede
 
   users.users.akyil = {                                  # Configuração do usuário 'akyil'
@@ -29,6 +31,15 @@
   nixpkgs.overlays = [
     (import /home/akyil/nixos/config/overlays/pywm-wayland-scanner.nix)  # Caminho para o seu overlay
   ];
+
+virtualisation.libvirtd = {
+  enable = true;                   # Ativa o libvirtd
+  qemu = {
+    package = pkgs.qemu_kvm;       # Usa QEMU com suporte KVM
+    runAsRoot = false;             # Para uso como usuário normal
+    swtpm.enable = true;           # TPM opcional, seguro deixar
+  };
+};
 
   programs.nix-ld.enable = true; # ativa o compat de binários externos
 
@@ -56,7 +67,7 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  virtualisation.libvirtd.enable = true;                 # Habilita o serviço libvirtd para VMs
+  # virtualisation.libvirtd.enable = true;                 # Habilita o serviço libvirtd para VMs
 
   systemd.services."start-libvirt-default-network" = {   # Serviço systemd para iniciar a rede "default" do libvirt no boot
     description = "Start default libvirt network on boot"; 
@@ -74,29 +85,42 @@
 
   # services.spice-vdagentd.enable = true;               # Habilita o agente SPICE para VMs
 
-  networking.firewall.allowedTCPPorts = [ 6969 ];        # Abre porta TCP 6969 no firewall
+networking.firewall.allowedTCPPorts = [
+  8090  # Porta para transmissão de som
+  6969  # Porta para outro serviço (ex: controle remoto)
+  27015
+];
+
+networking.firewall.allowedUDPPorts = [
+  27015 # Porta UDP exigida pelo jogo
+];
+
+
   # Se UDP for necessário, descomente a linha abaixo
   # networking.firewall.allowedUDPPorts = [ 6969 ];      # Abre porta UDP 6969
 
   environment.systemPackages = with pkgs; [              # Pacotes instalados globalmente
+
+    # estou pesando
+    # android-studio      # IDE Android
+
     blender-hip         # Programa de modelagem 3D especializado
     reaper              # DAW para edição de áudio
+    openutau            # UTAU
+
     unityhub            # Hub do Unity Engine
-    android-studio      # IDE Android
     virt-manager        # GUI para gerenciamento de VMs
-    gnome-boxes
     lunarvim            # Editor de texto (configurado como IDE)
-    firefox-esr
+    firefox-esr         # firefox
 
     wayfire             # Compositor Wayland (Wayfire)
     xwayland            # Compatibilidade X11 no Wayland
     wlsunset            # Ajuste de temperatura de cor no Wayland
     grim                # tira foto
-    slurp
-    ffmpeg
-    swww
-    wf-recorder
-    alacritty
+    slurp               # seletor
+    ffmpeg              # gravador
+    wf-recorder         # gravar video
+    swww                # wallpepar
 
     libsForQt5.dolphin  # Dolphin file manager (Qt5)
     libsForQt5.ark      # Ark para compressão/extração (Qt5)
@@ -104,12 +128,12 @@
     unrar               # Descompactador de RAR
 
     steam               # Plataforma de jogos Steam
-    lutris              # Gerenciador de jogos
     prismlauncher       # Launcher para jogos Prismatik
     jdk21               # Java Development Kit 21
     git
 
     pulseaudio          # Cliente PulseAudio (requerido por alguns apps)
+    pulseaudio-dlna
     playerctl           # Controle de player via CLI
 
     libsForQt5.konsole  # Terminal Konsole (Qt5)
@@ -152,9 +176,23 @@
     winetricks
     file
     dotnetCorePackages.sdk_8_0_3xx
-    wayfirePlugins.focus-request
     wtype
     wayfirePlugins.wcm
+    libvirt
+    wl-clip-persist
+clipman
+wl-clipboard
+android-tools
+  fuse # AppImage
+vlc
+
+
+ gamescope
+ gamemode
+
+    wl-clipboard # utilitário Wayland para clipboard
+    xclip         # utilitário X11 para clipboard (para o Proton)
+copyq
 ];
 
   hardware.graphics = {              # Configurações de GPU
