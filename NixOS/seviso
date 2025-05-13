@@ -1,4 +1,3 @@
-{
   services = {
     auditd.enable = true;                             # Serviço de auditoria do sistema
     firewall.enable = true;                           # Firewall embutido (normalmente usa iptables/nftables)
@@ -52,4 +51,3 @@
     };
     systemd.userSessions.enable = true;               # Gerencia sessões de usuário
   };
-}
