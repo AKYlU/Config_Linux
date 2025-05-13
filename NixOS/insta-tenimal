@@ -7,3 +7,6 @@ winetricks comctl32
 WINEARCH=win64 WINEPREFIX=~/.wine wineboot
 winetricks -q vcrun2019 dotnet48 corefonts
 https://bitmates.itch.io/mmo
+
+chmod +x remove-todos-servicos.sh
+sudo ./remove-todos-servicos.sh
