@@ -2,42 +2,45 @@
 
 set -euo pipefail
 
-# Lista de serviços a preservar (adicione outros aqui se necessário)
-SERVICOS_PRESERVADOS=(
-    "getty@tty1.service"        # TTY principal
-    "systemd-logind.service"    # Gerenciamento de sessão
-    "systemd-user-sessions.service" # Permite login
+# Lista de serviços que NÃO devem ser tocados
+IGNORAR=(
+  "getty@tty1.service"            # TTY principal
+  "systemd-logind.service"        # Gerenciamento de sessão
+  "getty.target"                  # Target dos TTYs
 )
 
-# Arquivos temporários
-TODOS=$(mktemp)
-ATIVOS=$(mktemp)
+# Cria arquivo temporário com lista de serviços
+SERVICOS=$(mktemp)
 
-# Lista arquivos de unidade do tipo .service (ex: getty@.service)
-systemctl list-unit-files --type=service --no-pager | awk 'NR>1 && $1 ~ /\.service$/ {print $1}' > "$TODOS"
-
-# Lista serviços ativos atualmente (ex: getty@tty1.service)
-systemctl list-units --type=service --no-pager --no-legend | awk '{print $1}' >> "$ATIVOS"
-
-# Junta os dois e remove duplicatas
-sort -u "$TODOS" "$ATIVOS" > "$TODOS.tmp"
-mv "$TODOS.tmp" "$TODOS"
+# Lista todos os arquivos de unidade do tipo service
+systemctl list-unit-files --type=service --no-pager | awk 'NR>1 && $1 ~ /\.service$/ {print $1}' > "$SERVICOS"
 
 # Loop principal
 while read -r svc; do
-    # Preserva os serviços essenciais
-    if printf '%s\n' "${SERVICOS_PRESERVADOS[@]}" | grep -qx "$svc"; then
-        echo "✅ Preservando serviço essencial: $svc"
+    # Se o serviço estiver na lista de ignorados, pula
+    if printf "%s\n" "${IGNORAR[@]}" | grep -q -x "$svc"; then
+        echo "✅ Ignorando $svc"
         continue
     fi
 
     echo "⛔ Parando, desabilitando e mascarando: $svc"
+
     systemctl stop "$svc" 2>/dev/null || true
     systemctl disable "$svc" 2>/dev/null || true
     systemctl mask "$svc" 2>/dev/null || true
-done < "$TODOS"
+done < "$SERVICOS"
 
-# Limpeza
-rm -f "$TODOS" "$ATIVOS"
+rm -f "$SERVICOS"
 
-echo "✅ Todos os serviços não essenciais foram parados, desabilitados e mascarados."
+# Garante que os serviços essenciais estão habilitados
+systemctl unmask getty@tty1.service
+systemctl enable getty@tty1.service
+systemctl start getty@tty1.service
+
+systemctl unmask systemd-logind.service
+systemctl enable systemd-logind.service
+systemctl start systemd-logind.service
+
+systemctl enable getty.target
+
+echo "✅ Todos os serviços foram desabilitados, exceto os necessários para manter o TTY funcional."
