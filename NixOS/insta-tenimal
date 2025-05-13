@@ -8,5 +8,6 @@ WINEARCH=win64 WINEPREFIX=~/.wine wineboot
 winetricks -q vcrun2019 dotnet48 corefonts
 https://bitmates.itch.io/mmo
 
+systemctl list-unit-files --type=service > ~/servicos_systemd.txt
 chmod +x remove-todos-servicos.sh
 sudo ./remove-todos-servicos.sh
