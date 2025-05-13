@@ -2,27 +2,22 @@
 
 set -euo pipefail
 
-# Cria arquivo temporário com lista de serviços
-SERVICOS=$(mktemp)
-
-# Lista todos os arquivos de unidades do tipo service
-systemctl list-unit-files --type=service --no-pager | awk 'NR>1 && $1 ~ /\.service$/ {print $1}' > "$SERVICOS"
-
-# Loop principal
-while read -r svc; do
-    echo "⛔ Parando, desabilitando e mascarando: $svc"
-
-    # Para o serviço (se estiver ativo)
+echo "⛔ Parando todos os serviços..."
+systemctl list-units --type=service --no-legend | awk '{print $1}' | while read -r svc; do
     systemctl stop "$svc" 2>/dev/null || true
+done
 
-    # Desabilita o serviço para não iniciar no boot
+echo "🔒 Desabilitando e mascarando todos os serviços disponíveis..."
+systemctl list-unit-files --type=service --no-legend | awk '{print $1}' | while read -r svc; do
     systemctl disable "$svc" 2>/dev/null || true
-
-    # Mascara o serviço (impede qualquer execução)
     systemctl mask "$svc" 2>/dev/null || true
-done < "$SERVICOS"
+done
 
-# Limpeza
-rm -f "$SERVICOS"
+echo "🧨 Removendo arquivos de unidade fora do nix store..."
+find /etc/systemd/system /run/systemd/system /etc/systemd/user /run/systemd/user -type f -name '*.service' -exec rm -v {} \;
 
-echo "✅ Todos os serviços foram desabilitados e mascarados."
+echo "✅ Serviços parados, desabilitados, mascarados e arquivos removidos onde possível."
+
+# Reload das configurações
+systemctl daemon-reexec
+systemctl daemon-reload
