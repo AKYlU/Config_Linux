@@ -1,30 +1,28 @@
 #!/usr/bin/env bash
 
-# Arquivo temporário com a lista de serviços
+set -euo pipefail
+
+# Cria arquivo temporário com lista de serviços
 SERVICOS=$(mktemp)
 
-# Lista todos os .service conhecidos pelo systemd
+# Lista todos os arquivos de unidades do tipo service
 systemctl list-unit-files --type=service --no-pager | awk 'NR>1 && $1 ~ /\.service$/ {print $1}' > "$SERVICOS"
 
-# Para cada serviço, desabilita, para e mascara
+# Loop principal
 while read -r svc; do
-    echo "Processando: $svc"
-    
-    # Evita travar o systemd em si
-    if [[ "$svc" =~ ^systemd-(init|reboot|poweroff|halt|shutdown|exit|sleep|suspend|hibernate|hybrid-sleep)\.service$ ]]; then
-        echo "⚠️  Ignorando essencial: $svc"
-        continue
-    fi
+    echo "⛔ Parando, desabilitando e mascarando: $svc"
 
-    # Desabilita o serviço
-    systemctl disable "$svc" --now 2>/dev/null
+    # Para o serviço (se estiver ativo)
+    systemctl stop "$svc" 2>/dev/null || true
 
-    # Máscara para garantir que não inicie nem manualmente
-    systemctl mask "$svc" 2>/dev/null
+    # Desabilita o serviço para não iniciar no boot
+    systemctl disable "$svc" 2>/dev/null || true
 
+    # Mascara o serviço (impede qualquer execução)
+    systemctl mask "$svc" 2>/dev/null || true
 done < "$SERVICOS"
 
-# Limpa
+# Limpeza
 rm -f "$SERVICOS"
 
-echo "✅ Todos os serviços processados."
+echo "✅ Todos os serviços foram desabilitados e mascarados."
