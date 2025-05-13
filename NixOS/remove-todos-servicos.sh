@@ -2,31 +2,42 @@
 
 set -euo pipefail
 
-# Serviço que queremos preservar
-PRESERVE="getty@tty1.service"
+# Lista de serviços a preservar (adicione outros aqui se necessário)
+SERVICOS_PRESERVADOS=(
+    "getty@tty1.service"        # TTY principal
+    "systemd-logind.service"    # Gerenciamento de sessão
+    "systemd-user-sessions.service" # Permite login
+)
 
-echo "⛔ Parando todos os serviços (exceto $PRESERVE)..."
-systemctl list-units --type=service --no-legend | awk '{print $1}' | while read -r svc; do
-    [[ "$svc" == "$PRESERVE" ]] && continue
+# Arquivos temporários
+TODOS=$(mktemp)
+ATIVOS=$(mktemp)
+
+# Lista arquivos de unidade do tipo .service (ex: getty@.service)
+systemctl list-unit-files --type=service --no-pager | awk 'NR>1 && $1 ~ /\.service$/ {print $1}' > "$TODOS"
+
+# Lista serviços ativos atualmente (ex: getty@tty1.service)
+systemctl list-units --type=service --no-pager --no-legend | awk '{print $1}' >> "$ATIVOS"
+
+# Junta os dois e remove duplicatas
+sort -u "$TODOS" "$ATIVOS" > "$TODOS.tmp"
+mv "$TODOS.tmp" "$TODOS"
+
+# Loop principal
+while read -r svc; do
+    # Preserva os serviços essenciais
+    if printf '%s\n' "${SERVICOS_PRESERVADOS[@]}" | grep -qx "$svc"; then
+        echo "✅ Preservando serviço essencial: $svc"
+        continue
+    fi
+
+    echo "⛔ Parando, desabilitando e mascarando: $svc"
     systemctl stop "$svc" 2>/dev/null || true
-done
-
-echo "🔒 Desabilitando e mascarando todos os serviços disponíveis (exceto $PRESERVE)..."
-systemctl list-unit-files --type=service --no-legend | awk '{print $1}' | while read -r svc; do
-    [[ "$svc" == "$PRESERVE" ]] && continue
     systemctl disable "$svc" 2>/dev/null || true
     systemctl mask "$svc" 2>/dev/null || true
-done
+done < "$TODOS"
 
-echo "🧨 Removendo arquivos de unidade fora do nix store (exceto $PRESERVE)..."
-find /etc/systemd/system /run/systemd/system /etc/systemd/user /run/systemd/user -type f -name '*.service' ! -name "$PRESERVE" -exec rm -v {} \;
+# Limpeza
+rm -f "$TODOS" "$ATIVOS"
 
-echo "✅ Serviços parados, desabilitados, mascarados e arquivos removidos, exceto $PRESERVE."
-
-# Reload das configurações
-systemctl daemon-reexec
-systemctl daemon-reload
-
-# Garante que o TTY está funcionando
-systemctl unmask "$PRESERVE"
-systemctl enable --now "$PRESERVE"
+echo "✅ Todos os serviços não essenciais foram parados, desabilitados e mascarados."
