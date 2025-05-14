@@ -1,5 +1,7 @@
 curl -o configuration.nix https://raw.githubusercontent.com/AnJLFifi/Install-Linux/main/NixOS/configuration.nix
 nixos-rebuild switch --upgrade
+nixos-rebuild test #teste
+nixos-rebuild switch -p test #separar as configurações de teste de “estável”
 
 # wine
 rm -rf ~/.wine
