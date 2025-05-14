@@ -13,3 +13,5 @@ https://bitmates.itch.io/mmo
 systemctl list-unit-files --type=service > ~/servicos_systemd.txt
 chmod +x remove-todos-servicos.sh
 sudo ./remove-todos-servicos.sh
+
+https://drive.google.com/file/d/1opjnVMrzxNMpks-E5ie1qJccZSuBjG1_/view?usp=sharing
