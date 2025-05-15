@@ -15,3 +15,8 @@ chmod +x remove-todos-servicos.sh
 sudo ./remove-todos-servicos.sh
 
 https://drive.google.com/file/d/1rx1lCyHdjhHZuVzchZxFx8GPaawZecK3/view?usp=sharing
+
+# flathub
+flatpak remote-delete flathub # Remover o repositório Flathub
+flatpak uninstall --all       # remover todos os apps
+
