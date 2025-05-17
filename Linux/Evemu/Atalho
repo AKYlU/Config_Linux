@@ -1,1 +1,1 @@
-
+xdg-open steam://open/bigpicture && sleep 6  && sudo evemu-play /dev/input/event1 < esc.evemu && sleep 7 &&  xdg-open steam://close/bigpicture
