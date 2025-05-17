@@ -1,0 +1,7 @@
+cvt 760 480
+# Copie a modeline, por exemplo:
+# Modeline "760x480_60.00"   28.00  760 776 848 936  480 483 493 500 -hsync +vsync
+
+xrandr --newmode "760x480_60.00" 28.00  760 776 848 936  480 483 493 500 -hsync +vsync
+xrandr --addmode Virtual-1 "760x480_60.00"
+xrandr --output Virtual-1 --mode "760x480_60.00"
