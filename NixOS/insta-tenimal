@@ -20,3 +20,5 @@ https://drive.google.com/file/d/1rx1lCyHdjhHZuVzchZxFx8GPaawZecK3/view?usp=shari
 flatpak remote-delete flathub # Remover o repositório Flathub
 flatpak uninstall --all       # remover todos os apps
 
+windowManager.kwin.enable = true;      # ativa o KWin especificamente
+
