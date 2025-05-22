@@ -21,4 +21,5 @@ flatpak remote-delete flathub # Remover o repositório Flathub
 flatpak uninstall --all       # remover todos os apps
 
 windowManager.kwin.enable = true;      # ativa o KWin especificamente
+kwin_wayland --xwayland
 
