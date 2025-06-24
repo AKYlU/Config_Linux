@@ -1,1 +1,0 @@
-set -U fish_user_paths /home/akil/.local/bin $fish_user_paths
