@@ -16,7 +16,7 @@
 
   networking.networkmanager.enable = true;
 
-  users.users.akyil = {                                  # Configuração do usuário 'akyil'
+  users.users.akil = {                                  # Configuração do usuário 'akyil'
     isNormalUser = true;                                 # Usuário não-root
     uid = 1000;                                          # ID de usuário
     extraGroups = [ "wheel" "video" "audio" "input" "libvirtd" ];  # Grupos adicionais
@@ -146,9 +146,9 @@ boot.kernel.sysctl."vm.swappiness" = 0; # Define o nível de uso da swap
   system.activationScripts.lvimConfig = {
     text = ''
       #!/usr/bin/env bash
-      mkdir -p /home/akyil/.config/lvim
+      mkdir -p /home/akil/.config/lvim
 
-      cat > /home/akyil/.config/lvim/config.lua << 'EOF'
+      cat > /home/akil/.config/lvim/config.lua << 'EOF'
 lvim.autocommands = {
   {
     "ColorScheme",
@@ -172,7 +172,7 @@ lvim.autocommands = {
 }
 EOF
 
-      chown -R akyil:akyil /home/akyil/.config/lvim
+      chown -R akil:akil /home/akil/.config/lvim
     '';
   };
 
@@ -180,22 +180,22 @@ EOF
   system.activationScripts.setupWayfireFish = {
     text = ''
       #!/usr/bin/env bash
-      mkdir -p /home/akyil/.config/fish
+      mkdir -p /home/akil/.config/fish
 
-      cat > /home/akyil/.config/fish/config.fish << 'EOF'
+      cat > /home/akil/.config/fish/config.fish << 'EOF'
 if test -z "\$DISPLAY"; and test (tty) = "/dev/tty1"
     exec wayfire
 end
 EOF
 
-      chown -R akyil:akyil /home/akyil/.config/fish
+      chown -R akil:akil /home/akil/.config/fish
     '';
   };
 
 system.activationScripts.librewolfUserChrome = {
   text = ''
     #!/usr/bin/env bash
-    user_home="/home/akyil"
+    user_home="/home/akil"
     for prof in "$user_home/.librewolf"/*.default; do
       [ -d "$prof" ] || continue                # skip if not a directory
       mkdir -p "$prof/chrome"                  # ensure chrome folder
@@ -209,9 +209,9 @@ system.activationScripts.librewolfUserChrome = {
   system.activationScripts.wayfireConfig = {
     text = ''
       #!/usr/bin/env bash
-      mkdir -p /home/akyil/.config
+      mkdir -p /home/akil/.config
 
-      cat > /home/akyil/.config/wayfire.ini << 'EOF'
+      cat > /home/akil/.config/wayfire.ini << 'EOF'
 [alpha]
 min_value = 0.040000
 modifier = <super> KEY_2
