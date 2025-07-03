@@ -40,6 +40,57 @@
 
   networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
 
+   services.getty.autologinUser = "akyil";   # Autologin em tty1
+
+# Desativa a espera por rede online no boot
+systemd.network.wait-online.enable = false;
+
+# Desativa sincronização de horário (útil em desktop offline)
+services.timesyncd.enable = false;
+
+# Desativa o firewall (se não for necessário)
+networking.firewall.enable = false;
+
+#security.polkit.enable = false;
+
+# Ative configurações sysctl persistentes via Nix
+boot.kernel.sysctl."vm.swappiness" = 0; # Define o nível de uso da swap
+
+#  services.keyd = {
+#    enable = true;
+#    keyboards.default = {
+#      settings = {
+#        main = {
+#        m5 = "m4";         # Tecla física 'a' envia 'b'
+#        M5 = "M4";         # Tecla física 'b' envia 'a'
+#         # capslock = "esc";  # Caps Lock vira Escape
+#        };
+#      };
+#    };
+#  };
+
+   hardware.graphics = {              # Configurações de GPU para steam
+    enable = true;                   # Habilita drivers gráficos
+    enable32Bit = true;   
+   };
+
+  fonts = {                          # Configuração de fontes e fontconfig
+    enableDefaultPackages = true;
+ };
+
+ programs.java = {                  # Configuração do Java
+    enable = true;
+    package = pkgs.jdk21;            # Define pacote JDK21
+   };
+
+  services.avahi.enable = false;         # Desative se não precisar de descoberta de rede local
+  services.openssh.enable = false;       # Só ative se realmente for usar acesso remoto
+  services.printing.enable = false;      # Desative se não tiver impressora
+
+   services.journald = {
+  storage = "none";  # Desativa armazenamento persistente e volátil
+};
+
   environment.systemPackages = with pkgs; [              # Pacotes instalados globalmente
 
     blender             # Programa de modelagem 3D especializado
@@ -125,6 +176,7 @@ EOF
     '';
   };
 
+# Abri o Wayfire
   system.activationScripts.setupWayfireFish = {
     text = ''
       #!/usr/bin/env bash
@@ -153,132 +205,6 @@ system.activationScripts.librewolfUserChrome = {
     done
   '';
 };
-
-#system.activationScripts.wayfireConfig = {
-#  text = ''
-#    #!/usr/bin/env bash
-#
-#    user_home="/home/akyil"  # caminho absoluto do usuário
-#
-#    # Criação do diretório de configuração se não existir
-#    mkdir -p "$user_home/.config"  # garante que ~/.config existe
-#
-#    # Baixa o arquivo wayfire.ini diretamente para ~/.config/
-#    ${pkgs.curl}/bin/curl -fsSL \
-#      https://raw.githubusercontent.com/AKYlU/Window_Manager/main/Wayfire/Config/wayfire.ini \
-#      -o "$user_home/.config/wayfire.ini"  # destino do arquivo
-#  '';
-#};
-
- services.journald = {
-  storage = "none";  # Desativa armazenamento persistente e volátil
-};
-
-   services.getty.autologinUser = "akyil";   # Autologin em tty1
-
-  #systemd.services.wayfire-session = {
-  #  description = "Wayfire autostart on tty1";  
-  #  after = [ "getty@tty1.service" ];
-  #  wantedBy = [ "multi-user.target" ];
-
-  #  serviceConfig = {
-  #    # ExecStart    = "${pkgs.wayfire}/bin/wayfire"; # Correct path via pkgs
-  #    User         = "akyil";                        # Run as user
-   #   TTYPath      = "/dev/tty1";                    # On console 1
-  #    StandardInput  = "tty";                        # Attach stdin
-   #   StandardOutput = "journal";                    # Log to journal
-  #    Restart      = "always";                       # Auto-restart on crash
-   # };
- # };
-
-# Desativa a espera por rede online no boot
-systemd.network.wait-online.enable = false;
-
-# Desativa sincronização de horário (útil em desktop offline)
-services.timesyncd.enable = false;
-
-# Desativa o firewall (se não for necessário)
-networking.firewall.enable = false;
-
-#security.polkit.enable = false;
-
-# programs.gamemode.enable = true;
-
-# Ative configurações sysctl persistentes via Nix
-boot.kernel.sysctl."vm.swappiness" = 0; # Define o nível de uso da swap
-
-#  zramSwap = {
- #  enable = true;
- #   memoryPercent = 25;
- # };
-
-
-  # services.dbus.enable = true;
-
-#  services.keyd = {
-#    enable = true;
-#    keyboards.default = {
-#      settings = {
-#        main = {
-#        m5 = "m4";         # Tecla física 'a' envia 'b'
-#        M5 = "M4";         # Tecla física 'b' envia 'a'
-#         # capslock = "esc";  # Caps Lock vira Escape
-#        };
-#      };
-#    };
-#  };
-
-# boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_6_6.override {
-#  configfile = ./custom-kernel/config-6.6.91;
-# });
-
-# services.nginx = {
- #   enable = true;
-#
- #   virtualHosts."_" = {
-  #    listen = [{
-   #     addr = "0.0.0.0";  # Escuta em todas interfaces
-    #    port = 8080;       # Porta 8080
-     # }];
-     # root = "/var/www/html";  # Local onde copiamos o index.html
-     # locations."/" = {
-      #  index = "index.html";  # Arquivo principal
-      #};
-    #};
-  #};
-
-#  programs.dconf.enable = true;      # Ativa o backend dconf no sistema para easyeffects
-
-   hardware.graphics = {              # Configurações de GPU para steam
-    enable = true;                   # Habilita drivers gráficos
-    enable32Bit = true;   
-   };
-
-  fonts = {                          # Configuração de fontes e fontconfig
-    enableDefaultPackages = true;
-#    fontconfig = {
-#      enable = true;                 # Habilita fontconfig
-#      antialias = true;              # Habilitação de antialias
-#      hinting.enable = true;         # Habilita hinting
-  #    subpixel.rgba = "rgb";         # Subpixel rendering RGB
-#   };
- };
-
- programs.java = {                  # Configuração do Java
-    enable = true;
-    package = pkgs.jdk21;            # Define pacote JDK21
-   };
-
-# environment.sessionVariables = {   # Variáveis de ambiente para sessões
-#     QT_QPA_PLATFORM = "wayland";     # Define plataforma Qt para Wayland
-#    QT_QPA_PLATFORMTHEME = "qt5ct";
-#    QT_STYLE_OVERRIDE = "Fusion";    # Força estilo Fusion no Qt
-#     GTK_THEME = "rose-pine-moon";      # Tema GTK Adwaita escuro
-# };
-
-  services.avahi.enable = false;         # Desative se não precisar de descoberta de rede local
-  services.openssh.enable = false;       # Só ative se realmente for usar acesso remoto
-  services.printing.enable = false;      # Desative se não tiver impressora
 
   system.activationScripts.wayfireConfig = {
     text = ''
