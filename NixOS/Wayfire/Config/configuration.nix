@@ -40,7 +40,7 @@
 
   networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
 
-   services.getty.autologinUser = "akyil";   # Autologin em tty1
+   services.getty.autologinUser = "akil";   # Autologin em tty1
 
 # Desativa a espera por rede online no boot
 systemd.network.wait-online.enable = false;
