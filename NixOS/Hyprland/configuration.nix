@@ -122,6 +122,13 @@ services.journald = {
   boot.initrd.kernelModules = [ "amdgpu" ];           # apenas o driver da iGPU Vega           #
   boot.kernelModules = [ ];                           # limpa módulos extras                   #
 
+xdg.portal = {
+  enable = true;
+  extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+
+};
+
+programs.dconf.enable = true;
 
   environment.systemPackages = with pkgs; [              # Pacotes instalados globalmente
 
@@ -134,7 +141,7 @@ services.journald = {
 
     # TUI
     lunarvim            # Editor de texto (configurado como IDE)
-    ranger              # File
+    #ranger              # File
     btop-rocm           # Cpu
 
     hyprshot            # foto
@@ -142,21 +149,22 @@ services.journald = {
     xwayland
     swww
     wlsunset            # Ajuste de temperatura de cor no Wayland
-    grim                # tira foto
-    slurp               # seletor
+    kooha                # gravador  
+    #grim                # tira foto
+    #slurp               # seletor
     #ffmpeg              # gravador
-    wf-recorder         # gravar video
-    qjackctl            # e som tambem mais nao sei para que seve
+    #wf-recorder         # gravar video
+    #qjackctl            # e som tambem mais nao sei para que seve
     # mpvpaper          # wallpepar
     pulseaudio          # Cliente PulseAudio (requerido por alguns apps)
     # qpwgraph            # para manda som da utau
-    kitty               # Terminal
+    #kitty               # Terminal
     #noto-fonts-cjk-sans # Fontes Noto CJK sans  
     wl-clipboard        # copiar/colar 
     # xclip               # copiar/colar
     # premid              # status
     done
-    xdg-utils           # xdg-open
+    #xdg-utils           # xdg-open
     playerctl           # Controle de player via CLI
     
     steam                            # Plataforma de jogos Steam
@@ -167,14 +175,18 @@ services.journald = {
     python3
     python3Packages.flask
 
-    atool               # zip
-    unzip               # zip
-    unrar               # rar
-    desktop-file-utils  # mine
-    ueberzugpp
+    #atool               # zip
+    #desktop-file-utils  # mine
+    #ueberzugpp
 
     #virt-manager        # GUI para gerenciamento de VMs
     # hyprlandPlugins.hyprexpo
+    kdePackages.dolphin
+    kdePackages.konsole
+    kdePackages.ark
+    unzip               # zip
+    unrar               # rar
+    dconf
 ];
 
   system.activationScripts.lvimConfig = {
@@ -257,20 +269,6 @@ EOF
   '';
 };
 
-system.activationScripts.librewolfUserChrome = {
-  text = ''
-    #!/usr/bin/env bash
-    user_home="/home/akil"
-    for prof in "$user_home/.librewolf"/*.default; do
-      [ -d "$prof" ] || continue                # skip if not a directory
-      mkdir -p "$prof/chrome"                  # ensure chrome folder
-      ${pkgs.curl}/bin/curl -fsSL \
-        https://raw.githubusercontent.com/AKYlU/Firafox_UI/main/Default--Release/userChrome.css \
-        -o "$prof/chrome/userChrome.css"       # download stylesheet
-    done
-  '';
-};
-
   system.activationScripts.wayfireConfig = {
     text = ''
       #!/usr/bin/env bash 
@@ -292,7 +290,7 @@ animations {
 } 
 
 input {
-    follow_mouse = 2              # Foco segue o movimento do mouse
+    follow_mouse = 1              # Foco segue o movimento do mouse
     accel_profile = flat          # sem aceleração
 }
 
@@ -315,32 +313,41 @@ bindm = $mainMod, mouse:273, resizewindow       # Redimensionar janela
 # exec-once = hyprctl dispatch workspace special:magic && librewolf  # Iniciar Firefox no workspace -98 (special:magic)
 exec-once = swww-daemon
 exec-once = wlsunset -T 3001 -t 3000 -S 00:01 -s 00:02
+exec-once = steam -silent && swww img  78X4l9.jpg
+# exec-once = unityhub -silent
+exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XAUTHORITY
+exec-once = librewolf 
 
-bind = $mainMod, Return, exec, kitty --override background_opacity=0.6             # Abrir terminal
+bind = $mainMod, Return, exec, konsole           # Abrir terminal
 bind = $mainMod, b, exec, blender              # Abrir Blender
 bind = $mainMod, s, exec, steam                  # Abrir Steam
 bind = $mainMod, m, exec, prismlauncher          # Abrir Prisms Launcher
 bind = $mainMod, n, exec, librewolf                # Abrir navegador Firefox
 bind = $mainMod, u, exec, unityhub
-bind = $mainMod, e, exec, kitty --override background_opacity=0.6 ranger
+bind = $mainMod, e, exec, dolphin
 bind = $mainMod, l, exec, kitty -e sudo env "PATH=$PATH" lvim # Abre o terminal alacritty com o comando sudo lvim
 bindl = $mainMod, q, exec, playerctl play-pause  # Alterna entre play e pause no player de mídia
 bindl = $mainMod, z, exec, playerctl previous    # Reproduz a música anterior no player de mídia
 bindl = $mainMod, a, exec, playerctl next        # Reproduz a próxima música no player de mídia
 bind = , PAUSE, exec, hyprshot -m region --clipboard-only --freeze
+bind = , PRINT, exec, kooha
+
 
 bind = $mainMod, Grave, togglespecialworkspace, magic         # Alternar workspace especial (magic)
 bind = $mainMod SHIFT, Grave, movetoworkspace, special:magic  # Mover para o workspace especial
 bind = $mainMod, 1, workspace, 1                 # Muda para o workspace 1
 bind = $mainMod SHIFT, 1, movetoworkspace, 1     # Move a janela atual para o workspace 1
-
-# windowrule = workspace 1, steam              # Move a janela da Steam para o workspace 1
-# windowrule = workspace 1, steam_app_.*
+bind = $mainMod, 2, workspace, 2                 # Muda para o workspace 1
+bind = $mainMod SHIFT, 2, movetoworkspace, 2     # Move a janela atual para o workspace 1
 
 bindel = ,XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +5%  # Aumenta o volume
 bindel = ,XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -5%  # Diminui o volume
 
 windowrulev2 = float, class:.*    # Faz com que TODAS as janelas sejam flutuantes
+windowrule = opacity 1 0.8 1, class:.*              # Definir opacidade das janelas
+windowrulev2 = opacity 1.0 override 1.0 override, title:^(Picture-in-Picture)$
+windowrulev2 = workspace 2, class:^(steam)$, title:^Steam$
+windowrulev2 = workspace 2 silent, class:^(steam_app_.*)$
 EOF
 
       chown akil:users /home/akil/.config/hypr/hyprland.conf  
@@ -348,6 +355,159 @@ EOF
     '';
   };
 
+system.activationScripts.librewolfUserChrome = {
+  text = ''
+    #!/usr/bin/env bash
+
+    user_home="/home/akil"
+
+    for prof in "$user_home/.librewolf"/*.default; do
+      [ -d "$prof" ] || continue
+
+      chrome_dir="$prof/chrome"
+      mkdir -p "$chrome_dir"
+
+      # Escreve userChrome.css com CSS personalizado
+      cat > "$chrome_dir/userChrome.css" << 'EOF'
+/* ——— ROOT & variáveis ——— */
+:root {
+  background: transparent !important;
+  --tabpanel-background-color: #0000 !important;
+  /* altura fixa da barra de abas */
+  --tab-min-height: 4px !important;
+  /* remove a linha entre abas e conteúdo */
+  --tabs-border-color: rgba(0,0,0,0) !important;
+}
+
+/* Habilitar via about:config:
+   toolkit.legacyUserProfileCustomizations.stylesheets = true
+   browser.tabs.allow_transparent_browser = true */
+
+/* ——— Janela principal e barras ——— */
+#main-window,
+#navigator-toolbox,
+#titlebar,
+#nav-bar,
+#PersonalToolbar {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 2147483647 !important;
+}
+
+/* ——— Autohide discreto da barra de abas (altura fixa de 4px) ——— */
+#TabsToolbar {
+  height: var(--tab-min-height) !important;  /* 4px */
+  opacity: 0.1 !important;                   /* quase invisível */
+  pointer-events: none !important;           /* não bloqueia clique */
+  transition: opacity 0.15s ease;            /* transição suave */
+}
+#navigator-toolbox:hover > #TabsToolbar,
+#TabsToolbar:hover {
+  opacity: 1 !important;                     /* visível ao hover */
+  pointer-events: auto !important;           /* habilita clique */
+}
+
+/* ——— Garante que as próprias abas e o botão “+” sejam clicáveis ——— */
+#tabbrowser-tabs,
+.tabbrowser-tab,
+.tabs-newtab-button {
+  pointer-events: auto !important;
+}
+/* remove interferência de áreas vazias no clique */
+#tabbrowser-tabs .arrowscrollbox-scrollbox {
+  pointer-events: none !important;
+}
+
+/* ——— Abas (blur, sem borda/sombra) ——— */
+.tabbrowser-tab {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  flex-grow: 0 !important;
+  flex-shrink: 1 !important;
+  margin-inline: 0 !important;
+}
+.tab-background { background: transparent !important; border: none !important; }
+.tabbrowser-tab[selected] .tab-background {
+  background-color: rgba(30,30,30,0.25) !important;
+  backdrop-filter: blur(14px) !important;
+}
+.tabbrowser-tab:not([selected]) .tab-background {
+  background-color: rgba(30,30,30,0.1) !important;
+  backdrop-filter: blur(6px) !important;
+}
+/* Texto das abas */
+.tabbrowser-tab .tab-label { color: rgba(255,255,255,0.7) !important; }
+.tabbrowser-tab[selected] .tab-label { color: #fff !important; }
+
+/* ——— Barra de endereço e busca com blur ——— */
+#urlbar-background,
+#searchbar {
+  background-color: rgba(20,20,20,0.3) !important;
+  backdrop-filter: blur(10px) !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* ——— Menus, popups, botões ——— */
+#PanelUI-button,
+#PanelUI-button > .toolbarbutton-icon,
+menupopup,
+.popup-internal-box,
+.panel-subview-body,
+.panel-arrowcontent {
+  background-color: rgba(25,25,25,0.4) !important;
+  backdrop-filter: blur(16px) !important;
+  box-shadow: none !important;
+  border: none !important;
+  color: white !important;
+}
+/* remove foco visual extra */
+*:-moz-focusring { outline: none !important; }
+/* oculta botões de fechar/ “todas abas” */
+.tab-close-button,
+#alltabs-button { display: none !important; }
+/* tooltips imediatos, sem animações */
+tooltip, .tooltip * {
+  animation: none !important;
+  transition: none !important;
+  animation-delay: 0 !important;
+  transition-delay: 0 !important;
+}
+.tooltip-label {
+  display: block !important;
+  opacity: 1 !important;
+  transition-delay: 0 !important;
+}
+
+/* ——— Barra de favoritos e ajustes de layout ——— */
+#PersonalToolbar { height: 17px !important; }
+#navigator-toolbox { margin-top: -12px !important; }
+#nav-bar { margin-top: -70px !important; overflow: hidden !important; }
+#TabsToolbar { overflow: hidden !important; }
+
+/* ——— Downloads & extensões clicáveis ——— */
+#downloads-button,
+#downloads-button .toolbarbutton-dropdown-button,
+#unified-extensions-button,
+#unified-extensions-button > .toolbarbutton-icon,
+#unified-extensions-button > .toolbarbutton-badge-stack {
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 2147483648 !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+EOF
+
+      chown akil:users "$chrome_dir/userChrome.css"
+      chmod 644 "$chrome_dir/userChrome.css"
+    done
+  '';
+};
   system.stateVersion = "25.05";     # Versão do estado do sistema para atualizações
 }
 
