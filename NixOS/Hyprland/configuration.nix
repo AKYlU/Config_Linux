@@ -19,7 +19,7 @@
   users.users.akil = {                                   # Configuração do usuário 'akyil'
     isNormalUser = true;                                 # Usuário não-root
     uid = 1000;                                          # ID de usuário
-    extraGroups = ["video" "plugdev" "storage"];         # Grupos adicionais
+    extraGroups = ["video" "audio" "plugdev" "storage"];         # Grupos adicionais
     shell = pkgs.fish;                                   # Define o shell padrão como Fish
   };
 
@@ -36,7 +36,7 @@
     enable = true;
     alsa.enable = true;                                  # Suporte ALSA
     pulse.enable = true;                                 # Habilita compatibilidade PulseAudio
-    jack.enable = false;                                 # Habilita compatibilidade JACK
+    jack.enable = true;                                 # Habilita compatibilidade JACK
   };
 
   networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];      # DNS
@@ -59,6 +59,10 @@
         rightcontrol = "down";                           # Ctrl direito vira seta para baixo
         rightshift   = "up";                             # Shift direito vira seta para cima
         capslock     = "delete";
+       #  backspace    = "pageup";
+        leftmeta     = "leftalt";
+        rightmeta   = "pageup";
+        leftalt      = "pagedown";
       };
     };
   };
@@ -115,10 +119,18 @@ services.journald = {
   boot.initrd.kernelModules = [ "amdgpu" ];              # apenas o driver da iGPU Vega           
   boot.kernelModules = [ ];                              # limpa módulos extras                   
 
-xdg.portal = {                                           # pode gravar a tela
+xdg.portal = {
   enable = true;
-  extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
 
+  # Permitir todos os portais por padrão
+  config.common.default = "*";
+
+  # Portais adicionais: Hyprland, GTK e WLR
+  extraPortals = [
+    pkgs.xdg-desktop-portal-hyprland
+    pkgs.xdg-desktop-portal-gtk
+    pkgs.xdg-desktop-portal-wlr
+  ];
 };
 
   environment.systemPackages = with pkgs; [              # Pacotes instalados globalmente
@@ -157,6 +169,9 @@ xdg.portal = {                                           # pode gravar a tela
     adwaita-icon-theme           # Ponteiro do Mouse
     kdePackages.partitionmanager # Disco
     lxqt.lxqt-policykit          # Para da Root
+
+    ffmpeg                       # Blender gravar
+    alsa-utils                   # Gravar
 ];
 
   system.activationScripts.lvimConfig = {  # Para deixa o Lvim transparent
@@ -273,9 +288,9 @@ env = XCURSOR_THEME,Adwaita
 env = XCURSOR_SIZE,16
 exec-once = hyprctl setcursor Adwaita 16
 
-monitor = ,preferred,auto,auto    # Configuração de Monitor
+monitor = ,preferred,auto,0.833333     # Configuração de Monitor
 
-$mainMod = SUPER                  # Definir a Tecla Modificadora Principal (Tecla SUPER)
+$mainMod = ALT                       # Definir a Tecla Modificadora Principal (Tecla SUPER)
 
 bind = $mainMod, w, killactive                  # Fechar janela ativa
 bind = $mainMod shift, e, exit                  # Sair
@@ -304,9 +319,10 @@ bind = $mainMod, l, exec, kitty -e sudo env "PATH=$PATH" lvim # Abre o terminal 
 bindl = $mainMod, q, exec, playerctl play-pause  # Alterna entre play e pause no player de mídia
 bindl = $mainMod, z, exec, playerctl previous    # Reproduz a música anterior no player de mídia
 bindl = $mainMod, a, exec, playerctl next        # Reproduz a próxima música no player de mídia
-bind = , PAUSE, exec, hyprshot -m region --clipboard-only --freeze
-bind = , PRINT, exec, kooha
+bind = $mainMod, Tab, exec, hyprshot -m region --clipboard-only --freeze
+bind = $mainMod, delete, exec, kooha
 bind = $mainMod, f, fullscreen
+bind = $mainMod, p, exec, reaper
 
 bind = $mainMod, Grave, togglespecialworkspace, magic         # Alternar workspace especial (magic)
 bind = $mainMod SHIFT, Grave, movetoworkspace, special:magic  # Mover para o workspace especial
